@@ -14,16 +14,26 @@ INSANE_SKIP_${PN} = "already-stripped textrel"
 
 inherit lib_package
 
+SRC_URI = "file://libamcodec-210755d.tar.gz;md5=d2e7dc15302fa64eef54aa67da5f9f34 \
+           file://libamadec.pc \
+"
 SRC_URI_wetekplay = "file://libamcodec-75f23da.tar.gz;md5=2ff1cbc415271733e1241e8cde0b105e \
            file://audiodsp_codec_ddp_dcv.bin \
            file://libamadec.pc \
 "
-SRC_URI = "file://libamcodec-210755d.tar.gz;md5=d2e7dc15302fa64eef54aa67da5f9f34 \
+SRC_URI_odroidc1 = "file://libamcodec-75f23da.tar.gz;md5=2ff1cbc415271733e1241e8cde0b105e \
+           file://audiodsp_codec_ddp_dcv.bin \
+           file://libamadec.pc \
+"
+SRC_URI_odroidxu3 = "file://libamcodec-75f23da.tar.gz;md5=2ff1cbc415271733e1241e8cde0b105e \
+           file://audiodsp_codec_ddp_dcv.bin \
            file://libamadec.pc \
 "
 
-S_wetekplay = "${WORKDIR}/libamcodec-75f23da/amadec"
 S = "${WORKDIR}/libamcodec-210755d/amadec"
+S_wetekplay = "${WORKDIR}/libamcodec-75f23da/amadec"
+S_odroidc1 = "${WORKDIR}/libamcodec-75f23da/amadec"
+S_odroidxu3 = "${WORKDIR}/libamcodec-75f23da/amadec"
 
 FWL_wetekplay = "firmware-m6"
 
