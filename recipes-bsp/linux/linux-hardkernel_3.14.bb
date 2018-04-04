@@ -8,12 +8,11 @@ PV = "3.14.79+git${SRCPV}"
 KBRANCH ?= "odroidc2-3.14.y"
 SRCREV ?= "6ad167426fbad87ff62af517fc01ad9655a89e18"
 
-KBRANCH_odroidc2 = "odroidc2-3.14.y"
 SRCREV_odroidc2 = "424ef5d5da4ca7a46b810ad91be13592efae3ebf"
 
 #KERNEL_DEVICETREE_odroidc2 = "meson64_odroidc2.dtb"
 
-SRC_URI = "git://github.com/hardkernel/linux.git;branch=${KBRANCH}"
+SRC_URI = "git://github.com/PLi-metas/linux.git;branch=${KBRANCH}"
 
 SRC_URI += " \
 	file://add_uboot.patch \
