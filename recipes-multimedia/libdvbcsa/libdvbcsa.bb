@@ -7,7 +7,7 @@ SRCREV = "accd5eb1bc5b3538526eb71d89e77bdfe03d6bac"
 
 PV = "1.1.0"
 
-SRC_URI = "git://github.com/persianpros/libdvbcsa.git;protocol=https file://libdvbcsa.pc"
+SRC_URI = "git://github.com/PLi-metas/libdvbcsa.git;protocol=https file://libdvbcsa.pc"
 
 S = "${WORKDIR}/git"
 

@@ -16,7 +16,7 @@ DEPENDS = " gstreamer1.0 libamcodec libamavutils gstreamer1.0-libav  gstreamer1.
 
 SRCREV = "${AUTOREV}"
 PV = "1.0+git${SRCPV}"
-SRC_URI = "https://bitbucket.org/tromoto/gst-amlavsink1.git;protocol=git"
+SRC_URI = "https://github.com/PLi-metas/gst-amlavsink1.git;protocol=git"
 
 S = "${WORKDIR}/git"
 
