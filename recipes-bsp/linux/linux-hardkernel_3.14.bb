@@ -12,7 +12,7 @@ SRCREV_odroidc2 = "424ef5d5da4ca7a46b810ad91be13592efae3ebf"
 
 #KERNEL_DEVICETREE_odroidc2 = "meson64_odroidc2.dtb"
 
-SRC_URI = "git://github.com/PLi-metas/linux.git;branch=${KBRANCH}"
+SRC_URI = "git://github.com/PLi-metas/hardkernel.git;branch=${KBRANCH}"
 
 SRC_URI += " \
 	file://add_uboot.patch \
