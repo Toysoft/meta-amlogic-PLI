@@ -28,7 +28,6 @@ SRC_URI = "http://source.mynonpublic.com/wetek/linux-wetek-3.10.y-master.tar.gz 
 S = "${WORKDIR}/linux-wetek-3.10.y-master"
 B = "${WORKDIR}/build"
 
-
 do_configure_prepend () {
     cd ${STAGING_KERNEL_DIR}
     find -type f -name "*.z" -print0 | xargs -0 cp -f --parents -t ${B}
@@ -51,7 +50,6 @@ do_compile_prepend () {
 
 # Put debugging files into dbg package
 FILES_kernel-dbg += "/usr/src/kernel/drivers/amlogic/input/touchscreen/gslx680/.debug"
-
 
 do_install_append () {
     ln -s ${STAGING_KERNEL_DIR}/arch/arm/mach-meson6 ${STAGING_KERNEL_DIR}/include/mach
