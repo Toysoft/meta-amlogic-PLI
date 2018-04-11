@@ -20,14 +20,10 @@ SRC_URI_wetekplay = "file://libamcodec-75f23da.tar.gz;md5=2ff1cbc415271733e1241e
 SRC_URI_odroidc1 = "file://libamcodec-75f23da.tar.gz;md5=2ff1cbc415271733e1241e8cde0b105e \
            file://libamplayer.pc \
 "
-SRC_URI_odroidxu3 = "file://libamcodec-75f23da.tar.gz;md5=2ff1cbc415271733e1241e8cde0b105e \
-           file://libamplayer.pc \
-"
 
 S = "${WORKDIR}/libamcodec-210755d/amplayer"
 S_wetekplay = "${WORKDIR}/libamcodec-75f23da/amplayer"
 S_odroidc1 = "${WORKDIR}/libamcodec-75f23da/amplayer"
-S_odroidxu3 = "${WORKDIR}/libamcodec-75f23da/amplayer"
 
 EXTRA_OEMAKE = "\
     'CC=${CC}' \

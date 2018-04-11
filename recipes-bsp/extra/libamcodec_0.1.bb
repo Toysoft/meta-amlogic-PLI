@@ -25,16 +25,10 @@ SRC_URI_odroidc1 = "file://libamcodec-75f23da.tar.gz;md5=2ff1cbc415271733e1241e8
            file://libamcodec.pc \
            file://alsactl.conf \
 "
-SRC_URI_odroidxu3 = "file://libamcodec-75f23da.tar.gz;md5=2ff1cbc415271733e1241e8cde0b105e \
-           file://add-vformat-hevc.patch \
-           file://libamcodec.pc \
-           file://alsactl.conf \
-"
 
 S = "${WORKDIR}/libamcodec-210755d/amcodec"
 S_wetekplay = "${WORKDIR}/libamcodec-75f23da/amcodec"
 S_odroidc1 = "${WORKDIR}/libamcodec-75f23da/amcodec"
-S_odroidxu3 = "${WORKDIR}/libamcodec-75f23da/amcodec"
 
 EXTRA_OEMAKE = " \
     'CC=${CC}' \
