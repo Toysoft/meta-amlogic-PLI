@@ -10,7 +10,7 @@ require recipes-bsp/u-boot/u-boot.inc
 
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=c7383a594871c03da76b3707929d2919"
 
-COMPATIBLE_MACHINE = "khadas-vim"
+COMPATIBLE_MACHINE = "vim"
 
 SRCREV = "52d10ef9a0468f95c9f5cf85c578ca98f099bda1"
 

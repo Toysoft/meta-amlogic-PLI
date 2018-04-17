@@ -10,7 +10,7 @@ require recipes-bsp/u-boot/u-boot.inc
 
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=c7383a594871c03da76b3707929d2919"
 
-COMPATIBLE_MACHINE = "hardkernel-odroidc2"
+COMPATIBLE_MACHINE = "odroidc2"
 
 SRCREV = "205c7b3259559283161703a1a200b787c2c445a5"
 

@@ -10,13 +10,7 @@ require recipes-bsp/u-boot/u-boot.inc
 
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=c7383a594871c03da76b3707929d2919"
 
-COMPATIBLE_MACHINE_amlogic-p200 = "amlogic-p200"
-COMPATIBLE_MACHINE_amlogic-p201 = "amlogic-p201"
-COMPATIBLE_MACHINE_amlogic-p230 = "amlogic-p230"
-COMPATIBLE_MACHINE_amlogic-p231 = "amlogic-p231"
-COMPATIBLE_MACHINE_amlogic-p212 = "amlogic-p212"
-COMPATIBLE_MACHINE_amlogic-q200 = "amlogic-q200"
-COMPATIBLE_MACHINE_amlogic-q201 = "amlogic-q201"
+COMPATIBLE_MACHINE = "(p200|p201|p230|p231|p212|q200|q201)"
 
 SRCREV = "ffd40ecd0ea21fcb44462a0124eb843d34ef5c3e"
 SRCBRANCH = "n-amlogic-openlinux-20170606"

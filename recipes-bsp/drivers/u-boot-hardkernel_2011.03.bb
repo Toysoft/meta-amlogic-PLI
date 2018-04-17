@@ -58,6 +58,6 @@ FILES_u-boot-ini = "/boot/boot.ini \
 "
 CONFFILES_u-boot-ini = "/boot/boot.ini"
 
-COMPATIBLE_MACHINE = "(odroidc1|x8hp)"
+COMPATIBLE_MACHINE = "(odroidc1)"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
