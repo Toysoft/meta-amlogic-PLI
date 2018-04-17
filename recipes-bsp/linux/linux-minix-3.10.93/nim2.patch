@@ -1,0 +1,32 @@
+--- drivers/amlogic/dvb_tv/nimdetect.c	2016-04-08 22:45:23.000000000 +0300
++++ drivers/amlogic/dvb_tv/nimdetect.c	2016-11-20 22:05:28.805501884 +0300
+@@ -253,7 +253,7 @@
+ 	}
+ 
+ 	/* FEC_RESET */
+-	amlogic_gpio_request(GPIOD_8, "nimdetect"); 
++	amlogic_gpio_request(GPIOY_5, "nimdetect"); 
+ 	
+ 	/* INPUT1 POWER CTRL */
+ 	amlogic_gpio_request(GPIOAO_8, "nimdetect");
+@@ -265,9 +265,9 @@
+ 	amlogic_gpio_direction_output(GPIOAO_9, 0, "nimdetect"); //SWITCH OFF INPUT2 POWER		
+ 
+ 	/* RESET DEMOD(s) */
+-	amlogic_gpio_direction_output(GPIOD_8, 0, "nimdetect");
++	amlogic_gpio_direction_output(GPIOY_5, 0, "nimdetect");
+ 	msleep(600);
+-	amlogic_gpio_direction_output(GPIOD_8, 1, "nimdetect");
++	amlogic_gpio_direction_output(GPIOY_5, 1, "nimdetect");
+ 	msleep(200);
+ 
+ 
+@@ -339,7 +339,7 @@
+ 		if (weteknims.i2c[i] != NULL)
+ 			i2c_put_adapter(weteknims.i2c[i]);
+ 	}
+-	amlogic_gpio_free(GPIOD_8, "nimdetect");
++	amlogic_gpio_free(GPIOY_5, "nimdetect");
+ 	amlogic_gpio_free(GPIOAO_8, "nimdetect");
+ 	amlogic_gpio_free(GPIOAO_9, "nimdetect");
+ 	nim_dvb_pinctrl_put(&weteknims);

@@ -24,6 +24,7 @@ SRC_URI = "git://github.com/codesnake/amremote.git \
            file://gb800ueplus.conf \
            file://gilx3.conf \
            file://zgemmastar.conf \
+           file://minix.conf \
 "
 
 S = "${WORKDIR}/git"
@@ -54,6 +55,7 @@ do_install() {
     install -m 0644 ${WORKDIR}/gilx3.conf ${D}${sysconfdir}/amremote/
     install -m 0644 ${WORKDIR}/gb800ueplus.conf ${D}${sysconfdir}/amremote/
     install -m 0644 ${WORKDIR}/zgemmastar.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${WORKDIR}/minix.conf ${D}${sysconfdir}/amremote/
 }
 
 FILES_${PN} = "${bindir} ${sysconfdir}"

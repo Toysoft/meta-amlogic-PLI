@@ -8,7 +8,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 PROVIDES = "virtual/libgles1 virtual/libgles2 virtual/egl"
 
-COMPATIBLE_MACHINE = "(wetekplay|wetekplay2|odroidc2|odroidc1)"
+COMPATIBLE_MACHINE = "(wetekplay|wetekplay2|odroidc2|odroidc1|x8hp)"
 
 SRC_URI[gxbb.md5sum] = "90ef0a79c37ba65f2c1b992a9bba2874"
 SRC_URI[mx.md5sum] = "c833d32411389cba490bdaaa43263ba"
@@ -21,6 +21,7 @@ SRC_URI = "file://10-meson_mali.rules \
 S = "${WORKDIR}/opengl-meson-gxbb-r6p1-01rel0/usr"
 S_wetekplay = "${WORKDIR}/usr"
 S_odroidc1 = "${WORKDIR}/usr"
+S_x8hp = "${WORKDIR}/usr"
 
 INHIBIT_PACKAGE_STRIP = "1"
 do_compile() {

@@ -1,0 +1,102 @@
+diff -Naur a/sound/soc/aml/m8/aml_i2s.c b/sound/soc/aml/m8/aml_i2s.c
+--- a/sound/soc/aml/m8/aml_i2s.c	2017-03-06 21:20:51.797651000 +0300
++++ b/sound/soc/aml/m8/aml_i2s.c	2017-03-07 19:10:52.000000000 +0300
+@@ -43,6 +43,10 @@
+ #define ALSA_TRACE()
+ #endif
+ 
++extern int output_volume; //Volume control
++extern struct mutex m_volume; //Volume mutex
++#define VOL_CTL(s) ((unsigned int)(((signed short)(s))*(vol)) >> 15) //Volume scaling from 0~100
++
+ unsigned int aml_i2s_playback_start_addr = 0;
+ unsigned int aml_i2s_playback_phy_start_addr = 0;
+ unsigned int aml_i2s_capture_start_addr  = 0;
+@@ -680,6 +684,7 @@
+     struct aml_audio_buffer *tmp_buf = buffer->private_data;
+     void *ubuf = tmp_buf->buffer_start;
+     audio_stream_t *s = &prtd->s;
++    unsigned int vol;
+     int force_reinit_958 = 0;
+     force_reinit_958 = (IEC958_mode_codec == 0 && (READ_MPEG_REG(AIU_MEM_IEC958_START_PTR) != READ_MPEG_REG(AIU_MEM_I2S_START_PTR)));
+     if (s && s->device_type == AML_AUDIO_I2SOUT && (trigger_underrun) && kernel_android_50 == 1) {
+@@ -718,11 +723,15 @@
+             if (pos % align) {
+                 printk("audio data unligned: pos=%d, n=%d, align=%d\n", (int)pos, n, align);
+             }
++			mutex_lock(&m_volume);
++            vol = (output_volume * 0x8000) / 100;
++			mutex_unlock(&m_volume);
++
+             if (set_android_gain_enable == 0) {
+                 for (j = 0; j < n; j += 64) {
+                     for (i = 0; i < 16; i++) {
+-                        *left++ = (*tfrom++) ;
+-                        *right++ = (*tfrom++);
++                        *left++ = (int16_t)(VOL_CTL(*tfrom++));
++                        *right++ = (int16_t)(VOL_CTL(*tfrom++));
+                     }
+                     left += 16;
+                     right += 16;
+diff -Naur a/sound/soc/aml/m8/aml_m8.c b/sound/soc/aml/m8/aml_m8.c
+--- a/sound/soc/aml/m8/aml_m8.c	2017-03-06 21:20:51.797651000 +0300
++++ b/sound/soc/aml/m8/aml_m8.c	2017-03-07 19:46:01.000000000 +0300
+@@ -631,6 +631,35 @@
+     return 0;
+ }
+ 
++int output_volume = 100;
++struct mutex m_volume;
++ 
++static int pcm_pb_volume_info(struct snd_kcontrol *kcontrol,
++                               struct snd_ctl_elem_info *uinfo)
++{
++	uinfo->type = SNDRV_CTL_ELEM_TYPE_INTEGER;
++	uinfo->count = 1;
++	uinfo->value.integer.min = 0;
++	uinfo->value.integer.max = 100;
++	uinfo->value.integer.step = 1;
++    return 0;
++}
++static int pcm_pb_volume_get(struct snd_kcontrol *kcontrol,
++                              struct snd_ctl_elem_value *uvalue)
++{
++	mutex_lock(&m_volume);
++    uvalue->value.integer.value[0] = output_volume & 0xff;
++	mutex_unlock(&m_volume);
++	return 0;
++}
++static int pcm_pb_volume_put(struct snd_kcontrol *kcontrol,
++                              struct snd_ctl_elem_value *uvalue)
++{
++	mutex_lock(&m_volume);
++	output_volume = uvalue->value.integer.value[0]; 
++	mutex_unlock(&m_volume);
++    return 0;
++ }
+ static const struct snd_kcontrol_new aml_m8_controls[] = {
+ 	//SOC_DAPM_PIN_SWITCH("Ext Spk"),
+ 
+@@ -645,6 +674,14 @@
+ 	SOC_SINGLE_BOOL_EXT("Ext Spk Switch", 0,
+ 		aml_m8_get_spk,
+ 		aml_m8_set_spk),
++			{
++			.iface = SNDRV_CTL_ELEM_IFACE_MIXER,
++			.name = "Master Playback Volume",
++			.index = 0x00,
++			.info = pcm_pb_volume_info,
++			.get = pcm_pb_volume_get,
++			.put = pcm_pb_volume_put, 
++			},
+ 
+ 	SOC_ENUM_EXT("HDMI Audio Type", hdmi_audio_type_enum,
+         aml_hdmi_audio_type_get_enum,
+@@ -671,6 +708,7 @@
+     int hp_paraments[5];
+ 
+     printk(KERN_DEBUG "enter %s \n", __func__);
++	mutex_init(&m_volume);
+ 	p_aml_audio = snd_soc_card_get_drvdata(card);
+     ret = snd_soc_add_card_controls(codec->card, aml_m8_controls,
+                 ARRAY_SIZE(aml_m8_controls));

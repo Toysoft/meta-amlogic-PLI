@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
 UBOOT_REPO_URI ?= "git://github.com/hardkernel/u-boot.git"
 UBOOT_BRANCH ?= "odroidc-v2011.03"
 
-SRCREV = "f631c80969b33b796d2d4c077428b4765393ed2b"
+SRCREV = "b7b8dc21b64b9494618325c9b4d2fbae728aeed6"
 
 PV = "v2011.03+git${SRCPV}"
 
@@ -15,17 +15,11 @@ PACKAGES =+ "u-boot-ini"
 
 SRC_URI = " \
     ${UBOOT_REPO_URI};branch=${UBOOT_BRANCH} \
-    file://0001-ucl-use-host-compiler-supplied-by-OE.patch \
-    file://0003-use-lldiv-for-64-bit-division.patch \
-    file://0001-compiler_gcc-do-not-redefine-__gnu_attributes.patch \
     file://0001-ARM-asm-io.h-use-static-inline.patch \
     file://0001-board.c-fix-inline-issue.patch \
     file://0001-compile-add-gcc5.patch \
     file://0001-main-fix-inline-issue.patch \
     file://0001-usb-use-define-not-func.patch \
-"
-
-SRC_URI_append_odroidc1 = " \
     file://boot.ini \
 "
 
@@ -64,6 +58,6 @@ FILES_u-boot-ini = "/boot/boot.ini \
 "
 CONFFILES_u-boot-ini = "/boot/boot.ini"
 
-COMPATIBLE_MACHINE = "(odroidc1)"
+COMPATIBLE_MACHINE = "(odroidc1|x8hp)"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

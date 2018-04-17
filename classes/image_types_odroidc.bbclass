@@ -46,7 +46,7 @@ IMAGE_DEPENDS_odroidc-sdimg = " \
 			mtools-native \
 			dosfstools-native \
 			virtual/kernel \
-			${@base_contains("KERNEL_IMAGETYPE", "uImage", "u-boot", "",d)} \
+			${@bb.utils.contains("KERNEL_IMAGETYPE", "uImage", "u-boot", "",d)} \
 			"
 # Amlogic Boot magic
 BL1_SUFFIX ?= "bin.hardkernel"

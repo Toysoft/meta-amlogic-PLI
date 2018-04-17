@@ -25,13 +25,19 @@ SRC_URI_odroidc1 = "file://libamcodec-75f23da.tar.gz;md5=2ff1cbc415271733e1241e8
            file://audiodsp_codec_ddp_dcv.bin \
            file://libamadec.pc \
 "
+SRC_URI_x8hp = "file://libamcodec-75f23da.tar.gz;md5=2ff1cbc415271733e1241e8cde0b105e \
+           file://audiodsp_codec_ddp_dcv.bin \
+           file://libamadec.pc \
+"
 
 S = "${WORKDIR}/libamcodec-210755d/amadec"
 S_wetekplay = "${WORKDIR}/libamcodec-75f23da/amadec"
 S_odroidc1 = "${WORKDIR}/libamcodec-75f23da/amadec"
+S_x8hp = "${WORKDIR}/libamcodec-75f23da/amadec"
 
 FWL_wetekplay = "firmware-m6"
 FWL_odroidc1 = "firmware-m6"
+FWL_x8hp = "firmware-m6"
 
 EXTRA_OEMAKE = "\
     'CC=${CC}' \

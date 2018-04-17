@@ -1,0 +1,202 @@
+diff -ru a/drivers/amlogic/amports/amvdec.c b/drivers/amlogic/amports/amvdec.c
+--- a/drivers/amlogic/amports/amvdec.c	2016-04-08 22:45:23.000000000 +0300
++++ b/drivers/amlogic/amports/amvdec.c	2016-11-30 19:48:07.000000000 +0300
+@@ -773,6 +773,27 @@
+ 
+     return 0;
+ }
++
++int amhevc_suspend(struct platform_device *dev, pm_message_t event)
++{
++#if MESON_CPU_TYPE >= MESON_CPU_TYPE_MESON8
++    if (HAS_HEVC_VDEC) {
++        amhevc_pg_enable(false);
++    }
++#endif
++    return 0;
++}
++
++int amhevc_resume(struct platform_device *dev)
++{
++#if MESON_CPU_TYPE >= MESON_CPU_TYPE_MESON8
++    if (HAS_HEVC_VDEC) {
++        amhevc_pg_enable(true);
++    }
++#endif
++
++    return 0;
++}
+ #endif
+ 
+ #ifdef CONFIG_WAKELOCK
+@@ -893,6 +914,8 @@
+ #ifdef CONFIG_PM
+ EXPORT_SYMBOL(amvdec_suspend);
+ EXPORT_SYMBOL(amvdec_resume);
++EXPORT_SYMBOL(amhevc_suspend);
++EXPORT_SYMBOL(amhevc_resume);
+ #endif
+ 
+ MODULE_DESCRIPTION("Amlogic Video Decoder Utility Driver");
+diff -ru a/drivers/amlogic/amports/amvdec.h b/drivers/amlogic/amports/amvdec.h
+--- a/drivers/amlogic/amports/amvdec.h	2016-04-08 22:45:23.000000000 +0300
++++ b/drivers/amlogic/amports/amvdec.h	2016-11-30 19:47:42.000000000 +0300
+@@ -70,6 +70,8 @@
+ #ifdef CONFIG_PM
+ extern int amvdec_suspend(struct platform_device *dev, pm_message_t event);
+ extern int amvdec_resume(struct platform_device *dec);
++extern int amhevc_suspend(struct platform_device *dev, pm_message_t event);
++extern int amhevc_resume(struct platform_device *dec);
+ #endif
+ 
+ #if MESON_CPU_TYPE >= MESON_CPU_TYPE_MESON6
+diff -ru a/drivers/amlogic/amports/tsync_pcr.c b/drivers/amlogic/amports/tsync_pcr.c
+--- a/drivers/amlogic/amports/tsync_pcr.c	2016-04-08 22:45:23.000000000 +0300
++++ b/drivers/amlogic/amports/tsync_pcr.c	2016-11-30 19:46:44.000000000 +0300
+@@ -204,77 +204,82 @@
+ {
+ 	struct stream_buf_s *pbuf = NULL;
+ 	if (type == 0) {
+-		/* video */
+-		 #if MESON_CPU_TYPE >= MESON_CPU_TYPE_MESON8
+-			pbuf = get_buf_by_type(PTS_TYPE_HEVC);
+-			if (pbuf != NULL && pbuf->flag & BUF_FLAG_IN_USE)
+-				return stbuf_rp(pbuf);
+-		}
+-		#endif
+-
+-		pbuf = get_buf_by_type(PTS_TYPE_VIDEO);
+-		if (pbuf != NULL && pbuf->flag & BUF_FLAG_IN_USE)
+-			return stbuf_rp(pbuf);
+-	} else {
+-		/* audio */
+-		pbuf = get_buf_by_type(PTS_TYPE_AUDIO);
+-		if (pbuf != NULL && pbuf->flag & BUF_FLAG_IN_USE)
+-			return stbuf_rp(pbuf);
+-	}
++        // video
++#if MESON_CPU_TYPE >= MESON_CPU_TYPE_MESON8
++        pbuf=get_buf_by_type(PTS_TYPE_HEVC);
++        if (pbuf != NULL && pbuf->flag&BUF_FLAG_IN_USE) {
++            return stbuf_rp(pbuf);
++        }
++#endif
++
++        pbuf=get_buf_by_type(PTS_TYPE_VIDEO);
++        if (pbuf != NULL && pbuf->flag&BUF_FLAG_IN_USE) {
++            return stbuf_rp(pbuf);
++        }
++    }
++    else{
++        // audio
++        pbuf=get_buf_by_type(PTS_TYPE_AUDIO);
++        if (pbuf != NULL && pbuf->flag&BUF_FLAG_IN_USE) {
++            return stbuf_rp(pbuf);
++        }
++    }
+ 
+-	return 0;
++    return 0;
+ }
+ 
+-int get_stream_buffer_level(int type)
+-{
+-	struct stream_buf_s *pbuf = NULL;
+-	if (type == 0) {
+-		/* video */
+-		 #if MESON_CPU_TYPE >= MESON_CPU_TYPE_MESON8 
+-
+-			pbuf = get_buf_by_type(PTS_TYPE_HEVC);
+-			if (pbuf != NULL && pbuf->flag & BUF_FLAG_IN_USE)
+-				return stbuf_level(pbuf);
+-		}
+-		#endif
+-
+-		pbuf = get_buf_by_type(PTS_TYPE_VIDEO);
+-		if (pbuf != NULL && pbuf->flag & BUF_FLAG_IN_USE)
+-			return stbuf_level(pbuf);
+-	} else {
+-		/* audio */
+-		pbuf = get_buf_by_type(PTS_TYPE_AUDIO);
+-		if (pbuf != NULL && pbuf->flag & BUF_FLAG_IN_USE)
+-			return stbuf_level(pbuf);
+-	}
++int get_stream_buffer_level(int type){
++    stream_buf_t *pbuf=NULL;
++    if (type == 0) {
++        // video
++#if MESON_CPU_TYPE >= MESON_CPU_TYPE_MESON8
++        pbuf=get_buf_by_type(PTS_TYPE_HEVC);
++        if (pbuf != NULL && pbuf->flag&BUF_FLAG_IN_USE) {
++            return stbuf_level(pbuf);
++        }
++#endif
++
++        pbuf=get_buf_by_type(PTS_TYPE_VIDEO);
++        if (pbuf != NULL && pbuf->flag&BUF_FLAG_IN_USE) {
++            return stbuf_level(pbuf);
++        }
++    }
++    else{
++        // audio
++        pbuf=get_buf_by_type(PTS_TYPE_AUDIO);
++        if (pbuf != NULL && pbuf->flag&BUF_FLAG_IN_USE) {
++            return stbuf_level(pbuf);
++        }
++    }
+ 
+-	return 0;
++    return 0;
+ }
+ 
+-int get_stream_buffer_size(int type)
+-{
+-	struct stream_buf_s *pbuf = NULL;
+-	if (type == 0) {
+-		/* video */
+-		 #if MESON_CPU_TYPE >= MESON_CPU_TYPE_MESON8
+-
+-			pbuf = get_buf_by_type(PTS_TYPE_HEVC);
+-			if (pbuf != NULL && pbuf->flag & BUF_FLAG_IN_USE)
+-				return stbuf_size(pbuf);
+-		}
+-		 #endif
+-
+-		pbuf = get_buf_by_type(PTS_TYPE_VIDEO);
+-		if (pbuf != NULL && pbuf->flag & BUF_FLAG_IN_USE)
+-			return stbuf_size(pbuf);
+-	} else {
+-		/* audio */
+-		pbuf = get_buf_by_type(PTS_TYPE_AUDIO);
+-		if (pbuf != NULL && pbuf->flag & BUF_FLAG_IN_USE)
+-			return stbuf_size(pbuf);
+-	}
++int get_stream_buffer_size(int type){
++    stream_buf_t *pbuf=NULL;
++    if (type == 0) {
++        // video
++#if MESON_CPU_TYPE >= MESON_CPU_TYPE_MESON8
++        pbuf=get_buf_by_type(PTS_TYPE_HEVC);
++        if (pbuf != NULL && pbuf->flag&BUF_FLAG_IN_USE) {
++            return stbuf_size(pbuf);
++        }
++#endif
++
++        pbuf=get_buf_by_type(PTS_TYPE_VIDEO);
++        if (pbuf != NULL && pbuf->flag&BUF_FLAG_IN_USE) {
++            return stbuf_size(pbuf);
++        }
++    }
++    else{
++        // audio
++        pbuf=get_buf_by_type(PTS_TYPE_AUDIO);
++        if (pbuf != NULL && pbuf->flag&BUF_FLAG_IN_USE) {
++            return stbuf_size(pbuf);
++        }
++    }
+ 
+-	return 0;
++    return 0;
+ }
+ 
+ int get_min_cache_delay(void)
