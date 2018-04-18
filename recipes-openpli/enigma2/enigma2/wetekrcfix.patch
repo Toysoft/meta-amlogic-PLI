@@ -1,0 +1,14 @@
+diff -Naur enigma2-pli/lib/driver/rcinput.cpp enigma2-persianprince/lib/driver/rcinput.cpp
+--- enigma2-pli/lib/driver/rcinput.cpp	2018-04-17 21:18:26.000000000 +0430
++++ enigma2-persianprince/lib/driver/rcinput.cpp	2018-04-18 14:53:02.851075046 +0430
+@@ -88,6 +88,10 @@
+ 		}
+ 	}
+ 
++	if (ev->code == KEY_BACK) {
++		ev->code = KEY_EXIT;
++	}
++
+ #if KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE
+ 	if (ev->code == KEY_PLAY)
+ 	{
