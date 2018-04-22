@@ -5,7 +5,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
 PV = "3.14.79+git${SRCPV}"
 
-KBRANCH ?= "odroidc2-3.14.y"
+KBRANCH = "odroidc2-3.14.y"
 SRCREV ?= "6ad167426fbad87ff62af517fc01ad9655a89e18"
 
 SRCREV_odroidc2 = "424ef5d5da4ca7a46b810ad91be13592efae3ebf"
