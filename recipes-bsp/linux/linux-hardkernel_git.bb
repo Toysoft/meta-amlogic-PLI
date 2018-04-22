@@ -16,8 +16,8 @@ require recipes-kernel/linux/linux-dtb.inc
 # from where to fetch the kernel
 KERNEL_REPO_OWNER ??= "PLi-metas"
 KERNEL_REPO_URI ??= "git://github.com/${KERNEL_REPO_OWNER}/hardkernel.git"
-KBRANCH ?= "odroid-3.8.y"
-KBRANCH_odroidc1 ?= "odroidc-3.10.y"
+KBRANCH = "odroid-3.8.y"
+KBRANCH_odroidc1 = "odroidc-3.10.y"
 
 SRC_URI = " \
   ${KERNEL_REPO_URI};branch=${KBRANCH} \
