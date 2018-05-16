@@ -1,31 +1,19 @@
 SUMMARY = "AML remote setup"
 LICENSE = "GPLv2"
+MAINTAINER = "Persian Professionals"
 SECTION = "base"
 PRIORITY = "required"
 
 require conf/license/license-gplv2.inc
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+inherit gitpkgv
 
-SRCREV = "643104015fcca9882a73ece983025d52205fdc29"
+PV = "git${SRCPV}"
+PKGV = "git${GITPKGV}"
 
-SRC_URI = "git://github.com/codesnake/amremote.git \
-           file://wetek.conf \
-           file://wetek1.conf \
-           file://wetek2.conf \
-           file://wetek3.conf \
-           file://wetek_play2.conf \
-           file://alien.conf \
-           file://alien2.conf \
-           file://octagonsf8.conf \
-           file://wetek_et10000remote.conf \
-           file://wetek_hd2400remote.conf \
-           file://wetek_tmnanoremote.conf \
-           file://gb800ueplus.conf \
-           file://gilx3.conf \
-           file://zgemmastar.conf \
-           file://minix.conf \
-"
+SRCREV = "${AUTOREV}"
+
+SRC_URI = "git://github.com/PLi-metas/amremote.git;protocol=git"
 
 S = "${WORKDIR}/git"
 
@@ -38,24 +26,23 @@ do_install() {
     install -d ${D}${sysconfdir}/amremote
     install -m 0755 ${S}/remotecfg ${D}${bindir}/
     if [ "${MACHINE}" = "wetekplay2" ]; then
-	install -m 0644 ${WORKDIR}/wetek_play2.conf ${D}${sysconfdir}/amremote/wetek.conf
+	install -m 0644 ${S}/wetek_play2.conf ${D}${sysconfdir}/amremote/wetek.conf
     else
-    	install -m 0644 ${WORKDIR}/wetek.conf ${D}${sysconfdir}/amremote/
+    	install -m 0644 ${S}/wetek.conf ${D}${sysconfdir}/amremote/
     fi
-    install -m 0644 ${WORKDIR}/wetek1.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/wetek2.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/wetek3.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/wetek_play2.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/alien.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/alien2.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/octagonsf8.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/wetek_et10000remote.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/wetek_hd2400remote.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/wetek_tmnanoremote.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/gilx3.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/gb800ueplus.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/zgemmastar.conf ${D}${sysconfdir}/amremote/
-    install -m 0644 ${WORKDIR}/minix.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/wetek1.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/wetek2.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/wetek3.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/wetek_play2.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/alien.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/alien2.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/octagonsf8.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/wetek_et10000remote.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/wetek_hd2400remote.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/wetek_tmnanoremote.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/gilx3.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/gb800ueplus.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/zgemmastar.conf ${D}${sysconfdir}/amremote/
 }
 
 FILES_${PN} = "${bindir} ${sysconfdir}"
