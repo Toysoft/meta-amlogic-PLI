@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 SRCDATE = "20180513"
 
-DEPENDS = "linkdroid-libamadec-${MACHINE} linkdroid-libamcodec-${MACHINE}"
-RDEPENDS_${PN} = "linkdroid-libamadec-${MACHINE} linkdroid-libamcodec-${MACHINE}"
+DEPENDS = "linkdroid-libamadec-alien5 linkdroid-libamcodec-alien5"
+RDEPENDS_${PN} = "linkdroid-libamadec-alien5 linkdroid-libamcodec-alien5"
 
 inherit lib_package pkgconfig
 
