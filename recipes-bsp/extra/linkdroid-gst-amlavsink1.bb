@@ -11,7 +11,7 @@ inherit autotools pkgconfig
 ### TODO:
 ## cram plugins as did not have time to check which ones provide gst/video headers 
 ## QA still complains about host headers used, does not make any sense
-DEPENDS = " gstreamer1.0 linkdroid-libamcodec-${MACHINE} linkdroid-libamavutils-${MACHINE} gstreamer1.0-libav  gstreamer1.0-plugins-base  gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly "
+DEPENDS = " gstreamer1.0 linkdroid-libamcodec-alien5 linkdroid-libamavutils-alien5 gstreamer1.0-libav gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly "
 
 SRC_URI = "file://gst-aml-plugins-1.0.zip \
            file://osd-fb-axis.patch \
