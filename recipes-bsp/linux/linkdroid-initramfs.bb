@@ -3,9 +3,10 @@ DESCRIPTION = "Small image capable of booting a device. The kernel includes \
 the Minimal RAM-based Initial Root Filesystem (initramfs), which finds the \
 first 'init' program more efficiently."
 
-PACKAGE_INSTALL = "initramfs-boot-am linkdroid-nftl-dev-${MACHINE} parted e2fsprogs busybox udev base-passwd ${ROOTFS_BOOTSTRAP_INSTALL}"
+PACKAGE_INSTALL = "initramfs-boot-am linkdroid-nftl-dev-alien5 parted e2fsprogs busybox udev base-passwd ${ROOTFS_BOOTSTRAP_INSTALL}"
 
 DEPENDS = "linux-linkdroid"
+DEPENDS_k1pro = "linux-amlogic"
 
 IMAGE_FEATURES = ""
 
