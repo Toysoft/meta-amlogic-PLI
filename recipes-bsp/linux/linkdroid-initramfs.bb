@@ -6,7 +6,6 @@ first 'init' program more efficiently."
 PACKAGE_INSTALL = "initramfs-boot-am linkdroid-nftl-dev-alien5 parted e2fsprogs busybox udev base-passwd ${ROOTFS_BOOTSTRAP_INSTALL}"
 
 DEPENDS = "linux-linkdroid"
-DEPENDS_k1pro = "linux-amlogic"
 
 IMAGE_FEATURES = ""
 
