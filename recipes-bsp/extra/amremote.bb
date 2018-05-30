@@ -47,6 +47,23 @@ do_install() {
     install -m 0644 ${S}/gilx3.conf ${D}${sysconfdir}/amremote/
     install -m 0644 ${S}/gb800ueplus.conf ${D}${sysconfdir}/amremote/
     install -m 0644 ${S}/zgemmastar.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/a400.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/k1plus.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/m8s.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/m8splus.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/mb2.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/mx3g.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/mxpro2.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/mxqv20.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/mxqv31.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/qintex.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/tx1.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/tx3pro.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/tx5pro.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/vander.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/wechipv5.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/x96.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/x98.conf ${D}${sysconfdir}/amremote/
 }
 
 FILES_${PN} = "${bindir} ${sysconfdir}"
