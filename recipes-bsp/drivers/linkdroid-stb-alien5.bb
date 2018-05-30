@@ -11,7 +11,7 @@ SRCDATE = "20180418"
 
 PV = "${KV}+${SRCDATE}"
 
-SRC_URI = "file://${MACHINE}-stb-${SRCDATE}.zip"
+SRC_URI = "file://alien5-stb-${SRCDATE}.zip"
 
 S = "${WORKDIR}"
 

@@ -18,6 +18,10 @@ SRC_URI += "http://source.mynonpublic.com/linkdroid/linux-${PV}-${SRCDATE}.tar.g
     file://${MACHINE}.dts \
 "
 
+SRC_URI_append_k1pro += " \
+    file://avl6862.patch \
+"
+
 S = "${WORKDIR}/common"
 B = "${WORKDIR}/build"
 

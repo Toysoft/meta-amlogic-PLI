@@ -11,7 +11,7 @@ SRCDATE = "20180513"
 
 PV = "${KV}+${SRCDATE}"
 
-SRC_URI = "file://${MACHINE}-nftl_dev-${SRCDATE}.zip"
+SRC_URI = "file://alien5-nftl_dev-${SRCDATE}.zip"
 
 S = "${WORKDIR}"
 

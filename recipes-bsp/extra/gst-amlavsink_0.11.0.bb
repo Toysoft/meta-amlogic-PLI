@@ -12,6 +12,7 @@ inherit autotools pkgconfig
 
 DEPENDS = "gstreamer libamcodec libamavutils"
 DEPENDS_alien5 = "gstreamer linkdroid-libamcodec-${MACHINE} linkdroid-libamavutils-${MACHINE}"
+DEPENDS_k1pro = "gstreamer linkdroid-libamcodec-alien5 linkdroid-libamavutils-alien5"
 
 SRC_URI = "file://gst-aml-plugins-0.11.0.zip \
            file://osd_fix.patch \
