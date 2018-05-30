@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 SRCDATE = "20180513"
 
-DEPENDS = "linkdroid-libamavutils-${MACHINE} alsa-lib rtmpdump "
+DEPENDS = "linkdroid-libamavutils-alien5 alsa-lib rtmpdump "
 RDEPENDS_${PN} = "ffmpeg linkdroid-libamavutils-${MACHINE}"
 
 inherit lib_package pkgconfig
