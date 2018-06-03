@@ -3,6 +3,8 @@ DESCRIPTION = "Small image capable of booting a device. The kernel includes \
 the Minimal RAM-based Initial Root Filesystem (initramfs), which finds the \
 first 'init' program more efficiently."
 
+COMPATIBLE_MACHINE = "(alien5|k1pro)"
+
 PACKAGE_INSTALL = "initramfs-boot-am linkdroid-nftl-dev-alien5 parted e2fsprogs busybox udev base-passwd ${ROOTFS_BOOTSTRAP_INSTALL}"
 
 DEPENDS = "linux-linkdroid"
