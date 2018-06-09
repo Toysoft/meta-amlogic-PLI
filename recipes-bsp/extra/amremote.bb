@@ -32,7 +32,7 @@ do_install() {
     elif [ "${MACHINE}" = "alien5" ]; then
 	install -m 0644 ${S}/alien5.conf ${D}${sysconfdir}/amremote/remote.conf
     elif [ "${MACHINE}" = "k1pro" ]; then
-	install -m 0644 ${S}/alien5.conf ${D}${sysconfdir}/amremote/remote.conf
+	install -m 0644 ${S}/k1pro.conf ${D}${sysconfdir}/amremote/remote.conf
     else
     	install -m 0644 ${S}/wetek.conf ${D}${sysconfdir}/amremote/
     fi
@@ -52,6 +52,7 @@ do_install() {
     install -m 0644 ${S}/zgemmastar.conf ${D}${sysconfdir}/amremote/
     install -m 0644 ${S}/a400.conf ${D}${sysconfdir}/amremote/
     install -m 0644 ${S}/k1plus.conf ${D}${sysconfdir}/amremote/
+    install -m 0644 ${S}/k1pro.conf ${D}${sysconfdir}/amremote/
     install -m 0644 ${S}/m8s.conf ${D}${sysconfdir}/amremote/
     install -m 0644 ${S}/m8splus.conf ${D}${sysconfdir}/amremote/
     install -m 0644 ${S}/mb2.conf ${D}${sysconfdir}/amremote/
