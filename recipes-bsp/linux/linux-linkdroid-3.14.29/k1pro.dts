@@ -1221,7 +1221,7 @@
 		pinctrl-names = "p_ts0", "s_ts0", "s_ts1";
 		pinctrl-0 = <&dvb_p_ts0_pins>;
 		pinctrl-1 = <&dvb_s_ts0_pins>;
-		pinctrl-2 = <&dvb_s_ts1_pins>;
+		//pinctrl-2 = <&dvb_s_ts1_pins>;
 		resets = <&clock GCLK_IDX_DEMUX
 				&clock GCLK_IDX_ASYNC_FIFO
 				&clock GCLK_IDX_AHB_ARB0
@@ -1245,7 +1245,7 @@
 
 	};
 
-&pinmux {
+/* &pinmux {
 	dvb_p_ts0_pins:dvb_p_ts0_pins {
 		amlogic,setmask = <0x2 0x1f>;
 		amlogic,clrmask = <0x3 0x787 0x2 0xff000400>;
@@ -1263,13 +1263,7 @@
 		amlogic,clrmask = <0x2 0xf0000 0x1 0x7>;
 		amlogic,pins = "GPIODV_0", "GPIODV_8", "GPIODV_9", "GPIODV_10";
 	};
-
-	dtv_params_pin:dtv_params_pin {
-		amlogic,clrmask = <0x1 0x38000000 0x3 0x80>;
-		amlogic,pins = "GPIODV_13", "GPIODV_14", "GPIODV_15";
-	};
-
-};
+}; */
 
     /* SMC */
 	smartcard{

@@ -7,6 +7,8 @@ DEPENDS = "lzop-native virtual/${TARGET_PREFIX}gcc"
 
 inherit kernel machine_kernel_pr
 
+MACHINE_KERNEL_PR_append = ".1"
+
 LOCALVERSION ?= ""
 SRCDATE = "20180531"
 
@@ -16,6 +18,10 @@ SRC_URI[sha256sum] = "7160060b83e4523fed9e5b7070f9f772d74b638d55216643ae83f8a26c
 SRC_URI += "http://source.mynonpublic.com/linkdroid/linux-${PV}-${SRCDATE}.tar.gz \
     file://defconfig \
     file://${MACHINE}.dts \
+"
+
+SRC_URI_append_k1pro += " \
+    file://avl6211.patch \
 "
 
 S = "${WORKDIR}/common"
