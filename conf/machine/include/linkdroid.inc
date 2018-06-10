@@ -38,6 +38,28 @@ MACHINE_FEATURES = "bluetooth usbhost vfat alsa dvb-c nolcd hdmicec fb skins1080
 DVBPROVIDER = "kernel"
 DVBSKYPROVIDER = "kernel"
 
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS = "\
+    linkdroid-autoscript \
+    \
+    linkdroid-mali-alien5 \
+    linkdroid-gst-amlavsink1 \
+    gst-app \
+    linkdroid-libamplayer-alien5 \
+    linkdroid-libamavutils-alien5 \
+    linkdroid-libamadec-alien5 \
+    linkdroid-libamcodec-alien5 \
+    linkdroid-amlsetfb \
+    \
+    kernel-modules \
+    amremote \
+    linkdroid-opengl-amlogic \
+    \
+    linkdroid-stb-alien5 \
+    linkdroid-libavlib-audio-so-alien5 \
+    libmad \
+    linkdroid-extra-alien5 \
+    "
+
 ### TODO:     8189es builitin with cfg80211
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS = "\
      \
