@@ -1,8 +1,9 @@
 inherit image_types
 
 # Heavly influenced by image_types_fsl.bblcass 
-# Construct buildable odroidc2 SD  image according to the partition table  suggested by Hardkernel  at http://odroid.com/dokuwiki/doku.php?id=en:c2_partition_table
-# tested with odroidc2 with EMMC only
+# Construct buildable Odroid-c2 SD  image according to the partition table  suggested by Hardkernel  at http://odroid.com/dokuwiki/doku.php?id=en:c2_partition_table
+# tested with Odroid-c2 with EMMC only
+
 
 IMAGE_BOOTLOADER ?= "u-boot"
 
@@ -14,13 +15,7 @@ UBOOT_SUFFIX_SDCARD ?= "${UBOOT_SUFFIX}"
 #15k
 UBOOT_B1_POS ?= "1"
 
-#odroidxu3
-UBOOT_B2_POS_odroidxu3 ?= "31" 
-UBOOT_BIN_POS_odroidxu3 ?= "63"
-UBOOT_TZSW_POS_odroidxu3 ?= "2111"
-UBOOT_ENV_POS_odroidxu3 ?= "2625"
-
-#odroidc2
+#odroid-c2
 UBOOT_BIN_POS_odroidc2 ?= "97"
 UBOOT_ENV_POS_odroidc2 ?= "1440"
 
@@ -28,7 +23,6 @@ UBOOT_ENV_POS_odroidc2 ?= "1440"
 BOOTDD_VOLUME_ID ?= "${MACHINE}"
 
 # Set alignment to 1MB [in KiB]
-IMAGE_ROOTFS_ALIGNMENT_odroidxu3 = "4096"
 IMAGE_ROOTFS_ALIGNMENT_odroidc2 = "1024"
 
 SDIMG_ROOTFS_TYPE ?= "ext4"
@@ -38,15 +32,17 @@ SDIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.sdcard.img"
 # Boot partition size [in KiB] to get boot partition with size of 128M
 BOOT_SPACE ?= "131000"
 
-IMAGE_DEPENDS_sdcard = "parted-native:do_populate_sysroot \
-                        dosfstools-native:do_populate_sysroot \
-                        mtools-native:do_populate_sysroot \
-                        virtual/kernel:do_deploy \
-                        ${@d.getVar('IMAGE_BOOTLOADER', True) and d.getVar('IMAGE_BOOTLOADER', True) + ':do_deploy' or ''}"
+do_image_sdcard[depends] += " \
+    parted-native:do_populate_sysroot \
+    dosfstools-native:do_populate_sysroot \
+    mtools-native:do_populate_sysroot \
+    e2fsprogs-native:do_populate_sysroot \
+    virtual/kernel:do_populate_sysroot \
+    ${@base_contains("KERNEL_IMAGETYPE", "uImage", "u-boot:do_populate_sysroot", "",d)} \
+    "
 
 SDCARD = "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.sdcard"
 SDCARD_ROOTFS ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.ext4"
-SDCARD_GENERATION_COMMAND_odroidxu3= "generate_odroid_xu3_sdcard"
 SDCARD_GENERATION_COMMAND_odroidc2= "generate_odroid_c2_sdcard"
 
 generate_odroid_c2_sdcard () {
@@ -126,46 +122,6 @@ generate_odroid_c2_sdcard () {
 # ^                        ^            ^                        ^
 # |                        |            |                        |
 # 0                      2048     2MiB +  100MiB       2MiB +  100Mib + SDIMG_ROOTFS
-
-generate_odroid_xu3_sdcard () {
-	# Create partition table
-    parted -s ${SDCARD} mklabel msdos
-    # Create boot partition and mark it as bootable
-    parted -s ${SDCARD} unit KiB mkpart primary fat16 ${IMAGE_ROOTFS_ALIGNMENT} $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT})
-    # Create rootfs partition to the end of disk
-    parted -s ${SDCARD} -- unit KiB mkpart primary ext2 $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT}) -1s
-    parted ${SDCARD} print
-                            
-	case "${IMAGE_BOOTLOADER}" in
-		u-boot)
-            dd if=${DEPLOY_DIR_IMAGE}/bl1.bin.hardkernel of=${SDCARD} conv=notrunc seek=${UBOOT_B1_POS}
-            dd if=${DEPLOY_DIR_IMAGE}/bl2.bin.hardkernel of=${SDCARD} conv=notrunc seek=${UBOOT_B2_POS}
-            dd if=${DEPLOY_DIR_IMAGE}/u-boot-dtb.${UBOOT_SUFFIX} of=${SDCARD} conv=notrunc seek=${UBOOT_BIN_POS}
-            dd if=${DEPLOY_DIR_IMAGE}/tzsw.bin.hardkernel of=${SDCARD} conv=notrunc seek=${UBOOT_TZSW_POS}
-            dd if=/dev/zero of=${SDCARD} seek=${UBOOT_ENV_POS} conv=notrunc count=32 bs=512
-		;;
-
-		*)
-		bberror "Unknown IMAGE_BOOTLOADER value"
-		exit 1
-		;;
-	esac
-
-    # create Boot partition
-    BOOT_BLOCKS=$(LC_ALL=C parted -s ${SDCARD} unit b print \
-        | awk '/ 1 / { print substr($4, 1, length($4 -1)) / 1024 }')
-    echo "boot.img blocks ${BOOT_BLOCKS}"
-
-    mkfs.vfat -n "${BOOTDD_VOLUME_ID}" -S 512 -C ${WORKDIR}/boot.img ${BOOT_BLOCKS}
-
-    mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin ::/${KERNEL_IMAGETYPE}
-    mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-exynos5422-odroidxu3.dtb ::/exynos5422-odroidxu3-lite.dtb
-    mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/boot.scr ::/boot.scr
-
-    # Burn Partitions
-    dd if=${WORKDIR}/boot.img of=${SDCARD} conv=notrunc seek=1 bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && sync && sync
-    dd if=${SDIMG_ROOTFS} of=${SDCARD} conv=notrunc seek=1 bs=$(expr 1024 \* ${BOOT_SPACE_ALIGNED} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && sync && sync
-}
 
 IMAGE_CMD_sdcard () {
 	if [ -z "${SDCARD_ROOTFS}" ]; then
