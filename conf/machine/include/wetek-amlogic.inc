@@ -1,6 +1,6 @@
 IMAGE_CLASSES += "image_types_wetek"
 
-MACHINE_FEATURES += "wlan bluetooth fb usbhost vfat alsa dvb-c legacykernel nolcd"
+MACHINE_FEATURES += "wlan bluetooth fb usbhost vfat alsa dvb-c nolcd"
 
 PREFERRED_PROVIDER_virtual/libgles1 = "opengl-amlogic"
 PREFERRED_PROVIDER_virtual/libgles2 = "opengl-amlogic"
