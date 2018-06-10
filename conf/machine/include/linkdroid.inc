@@ -1,3 +1,68 @@
+KERNEL_FILE = "kernel.itb"
+ROOTFS_FILE = "rootfs.tar.bz2"
+
+SOC_FAMILY = "AML905D"
+
+# Amlogic defaults
+require conf/machine/include/linkdroid.inc
+require conf/machine/include/arm/arch-armv8.inc
+require conf/machine/include/soc-family.inc
+
+IMAGE_CLASSES += "sdcard_image-alien5"
+SDCARD_ROOTFS ?= "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4"
+IMAGE_FSTYPES ?= "ext4 alien5sdimg"
+#IMAGE_ROOTFS_SIZE = "976562"
+IMAGE_ROOTFS_SIZE = "476562"
+IMAGE_EXTRA_SPACE = "0"
+IMAGE_OVERHEAD_FACTOR = "1.0"
+
+BB_HASH_IGNORE_MISMATCH = "1"
+
+# Serial console to be used
+SERIAL_CONSOLE = "115200 ttyS0"
+
+PREFERRED_PROVIDER_virtual/kernel = "linux-linkdroid"
+PREFERRED_VERSION_linux-linkdroid = "3.14.29"
+
+KERNEL_CLASSES += "aarch64-fitimage"
+KERNEL_IMAGETYPE = "fitImage"
+
+UBOOT_ENTRYPOINT = "0x01080000"
+UBOOT_LOADADDRESS = "0x01080000"
+
+INITRAMFS_IMAGE = "linkdroid-initramfs"
+
+MACHINE_FEATURES = "bluetooth usbhost vfat alsa dvb-c nolcd hdmicec fb skins1080 emmc aml-plugins"
+#MACHINE_FEATURES = "kodi"
+
+DVBPROVIDER = "kernel"
+DVBSKYPROVIDER = "kernel"
+
+### TODO:     8189es builitin with cfg80211
+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS = "\
+     \
+    kernel-module-cdfs \
+    kernel-module-sysfillrect \
+    kernel-module-syscopyarea \
+    kernel-module-mceusb \
+    kernel-module-rc-core \
+    kernel-module-CH341 \
+    kernel-module-rfcomm \
+    kernel-module-hidp \
+    kernel-module-bluetooth \
+    kernel-module-6lowpan-iphc \
+    kernel-module-libcrc32c \
+    kernel-module-xfs \
+    kernel-module-8189es \
+    kernel-module-cfg80211 \
+    "
+
+MACHINE_EXTRA_RRECOMMENDS += " \
+    linkdroid-lkdosth \
+    libdvbcsa \
+    linkdroid-cnim \
+    "
+
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " ${@bb.utils.contains('MACHINE_FEATURES', 'fb', 'linkdroid-amlsetfb', '', d)}"
 
 PREFERRED_PROVIDER_virtual/libgles1 = "linkdroid-opengl-amlogic"
@@ -29,3 +94,6 @@ IMAGE_CMD_alien5sdimg_append = " \
     rm -f ${DEPLOY_DIR_IMAGE}/*-sd.img; \
     rm -Rf ${IMAGEDIR}; \
     "
+
+# We know about rtc
+include conf/machine/include/build-extras.inc
