@@ -4,7 +4,6 @@ ROOTFS_FILE = "rootfs.tar.bz2"
 SOC_FAMILY = "AML905D"
 
 # Amlogic defaults
-require conf/machine/include/linkdroid.inc
 require conf/machine/include/arm/arch-armv8.inc
 require conf/machine/include/soc-family.inc
 
