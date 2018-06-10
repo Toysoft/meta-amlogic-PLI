@@ -6,6 +6,8 @@ require conf/license/license-close.inc
 
 DEPENDS = "virtual/${TARGET_PREFIX}gcc"
 
+RDEPENDS_${PN}_k1pro += "firmware-avl6211"
+
 KV = "3.14.29"
 SRCDATE = "20180418"
 
