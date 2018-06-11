@@ -3,7 +3,7 @@ SECTION = "kernel"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
-COMPATIBLE_MACHINE = "(alien5|k1pro)"
+COMPATIBLE_MACHINE = "alien5"
 
 DEPENDS = "lzop-native virtual/${TARGET_PREFIX}gcc"
 
@@ -20,10 +20,6 @@ SRC_URI[sha256sum] = "7160060b83e4523fed9e5b7070f9f772d74b638d55216643ae83f8a26c
 SRC_URI += "http://source.mynonpublic.com/linkdroid/linux-${PV}-${SRCDATE}.tar.gz \
     file://defconfig \
     file://${MACHINE}.dts \
-"
-
-SRC_URI_append_k1pro += " \
-    file://avl6211.patch \
 "
 
 S = "${WORKDIR}/common"

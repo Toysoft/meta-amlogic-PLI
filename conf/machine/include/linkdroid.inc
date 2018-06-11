@@ -20,9 +20,6 @@ BB_HASH_IGNORE_MISMATCH = "1"
 # Serial console to be used
 SERIAL_CONSOLE = "115200 ttyS0"
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-linkdroid"
-PREFERRED_VERSION_linux-linkdroid = "3.14.29"
-
 KERNEL_CLASSES += "aarch64-fitimage"
 KERNEL_IMAGETYPE = "fitImage"
 
