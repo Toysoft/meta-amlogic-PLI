@@ -18,7 +18,7 @@ INHIBIT_PACKAGE_DEBUG_STRIP = "1"
 LINUX_VERSION ?= "3.14.29"
 LINUX_VERSION_EXTENSION ?= "amlogic"
 
-COMPATIBLE_MACHINE = "(wetekplay2)"
+COMPATIBLE_MACHINE = "wetekplay2"
 
 SRC_URI = "https://github.com/wetek-enigma/linux-amlogic/archive/amlogic-3.14.y.tar.gz \
    file://defconfig \
