@@ -4,6 +4,8 @@ PRIORITY = "required"
 LICENSE = "CLOSED"
 require conf/license/license-close.inc
 
+COMPATIBLE_MACHINE = "wetekplay"
+
 KV = "3.10.93"
 SRCDATE = "20160420"
 
