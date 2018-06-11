@@ -4,6 +4,8 @@ SECTION = "base"
 LICENSE = "proprietary"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+COMPATIBLE_MACHINE = "(alien5|k1pro)"
+
 require conf/license/license-gplv2.inc
 
 inherit update-rc.d
