@@ -1,7 +1,11 @@
-#include "gxl_p230_2g.dts"
+#include "gxm_q200_2g.dts"
 
 /{
-	le-dt-id = "gxl_p230_k1_pro";
+	le-dt-id = "gxm_q200_k3_pro";
+	memory@00000000 {
+		linux,usable-memory = <0x0 0x100000 0x0 0xbf000000>;
+	};
+
 	dvb {
 		compatible = "amlogic,dvb";
 		dev_name = "dvb";
@@ -57,7 +61,6 @@
 		amlogic,clrmask = <0x1 0x38000000 0x3 0x80>;
 		amlogic,pins = "GPIODV_13", "GPIODV_14", "GPIODV_15";
 	};
-
 };
 
 &i2c_a {
@@ -74,4 +77,8 @@
 
 &i2c_d {
 	status = "okay";
+};
+
+&efuse {
+	status = "ok";
 };
