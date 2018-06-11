@@ -18,7 +18,7 @@ INHIBIT_PACKAGE_DEBUG_STRIP = "1"
 LINUX_VERSION ?= "3.10.93"
 LINUX_VERSION_EXTENSION ?= "amlogic"
 
-COMPATIBLE_MACHINE = "(wetekplay)"
+COMPATIBLE_MACHINE = "wetekplay"
 
 SRC_URI = "http://source.mynonpublic.com/wetek/linux-wetek-3.10.y-master.tar.gz \
     file://defconfig \
