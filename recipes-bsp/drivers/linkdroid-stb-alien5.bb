@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE = "(alien5|k1pro)"
 
 DEPENDS = "virtual/${TARGET_PREFIX}gcc"
 
-RDEPENDS_${PN}_k1pro += "firmware-avl6211"
+RDEPENDS_${PN}_k1pro += "firmware-avl6211 firmware-avl6882"
 
 KV = "3.14.29"
 SRCDATE = "20180418"
