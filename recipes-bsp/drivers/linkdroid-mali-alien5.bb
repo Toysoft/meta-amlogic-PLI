@@ -4,6 +4,8 @@ PRIORITY = "required"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://Makefile;md5=d0d2f45bce10dd67cca4a749d12e535e"
 
+COMPATIBLE_MACHINE = "(alien5|k1pro)"
+
 SRC_URI[md5sum] = "b849349480679ca6253cf2660e366ec6"
 
 SRC_URI = "http://sources.libreelec.tv/devel/gpu-aml-r6p1-01rel0-2364187.tar.xz"
