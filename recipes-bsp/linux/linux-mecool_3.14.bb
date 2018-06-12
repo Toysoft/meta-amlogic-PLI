@@ -16,7 +16,7 @@ LOCALVERSION ?= ""
 SRC_URI[md5sum] = "914bbd4442c3fe880a9d7f922bec0be3"
 SRC_URI[sha256sum] = "c34cebda340545f9d3c9867994114ce4549cc22f4194d3ed07accfc10bc48a1e"
 
-SRC_URI += "https://github.com/persianpros/linux-amlogic/archive/amlogic-3.14-osmc.zip \
+SRC_URI += "https://github.com/PLi-metas/linux-amlogic/archive/amlogic-3.14-osmc.zip \
     file://defconfig \
     file://${MACHINE}.dts \
 "
