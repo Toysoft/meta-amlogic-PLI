@@ -4,7 +4,7 @@ PRIORITY = "required"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://Makefile;md5=d0d2f45bce10dd67cca4a749d12e535e"
 
-COMPATIBLE_MACHINE = "(alien5|k1pro)"
+COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro)"
 
 SRC_URI[md5sum] = "b849349480679ca6253cf2660e366ec6"
 

@@ -3,15 +3,16 @@ SECTION = "kernel"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
-COMPATIBLE_MACHINE = "alien5|k1pro"
+COMPATIBLE_MACHINE = "alien5|k1pro|k2pro"
 
 DEPENDS = "lzop-native virtual/${TARGET_PREFIX}gcc"
 
 inherit kernel machine_kernel_pr
 
-MACHINE_KERNEL_PR_append = ".2"
+MACHINE_KERNEL_PR_append = ".3"
 
 EXTRA_OEMAKE_k1pro = "LDFLAGS=''"
+EXTRA_OEMAKE_k2pro = "LDFLAGS=''"
 
 LOCALVERSION ?= ""
 SRCDATE = "20180531"
@@ -25,6 +26,7 @@ SRC_URI += "http://source.mynonpublic.com/linkdroid/linux-${PV}-${SRCDATE}.tar.g
 "
 
 SRC_URI_append_k1pro += "file://avl.patch"
+SRC_URI_append_k2pro += "file://avl.patch"
 
 S = "${WORKDIR}/common"
 B = "${WORKDIR}/build"
@@ -33,7 +35,7 @@ do_configure_prepend () {
    cp -f ${WORKDIR}/${MACHINE}.dts ${S}/arch/arm64/boot/dts/amlogic/
 }
 
-do_compile_prepend () {
+do_compile_prepend_alien5 () {
   install -d ${B}/drivers/amlogic/amports/
   cp -fr ${S}/drivers/amlogic/amports/amstream.o  ${B}/drivers/amlogic/amports/
   install -d ${B}/drivers/amlogic/dvb_tv/
@@ -72,7 +74,7 @@ do_compile_prepend () {
   fi
 }
 
-do_compile_prepend_k1pro () {
+do_compile_prepend () {
   oe_runmake  ${S}/drivers/amlogic/dvb-avl/
   install -d ${B}/drivers/amlogic/dvb-avl/
   cp -fr ${S}/drivers/amlogic/dvb-avl/aml.o  ${B}/drivers/amlogic/dvb-avl/

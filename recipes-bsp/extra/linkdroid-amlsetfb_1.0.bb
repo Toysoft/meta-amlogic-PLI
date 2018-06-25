@@ -2,7 +2,7 @@ SUMMARY = "SysV init scripts for Amlogic framebuffer set-up"
 DESCRIPTION = "Provides basic set-up for the amlogic framebuffer"
 SECTION = "base"
 
-COMPATIBLE_MACHINE = "(alien5|k1pro)"
+COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro)"
 
 include conf/license/license-gplv2.inc
 
