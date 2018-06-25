@@ -37,7 +37,7 @@ DVBSKYPROVIDER = "kernel"
 PREFERRED_PROVIDER_virtual/kernel = "linux-linkdroid"
 PREFERRED_VERSION_linux-linkdroid = "3.14.29"
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS = "\
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     linkdroid-autoscript \
     \
     linkdroid-mali-alien5 \
@@ -60,7 +60,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS = "\
     "
 
 ### TODO:     8189es builitin with cfg80211
-MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS = "\
+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
      \
     kernel-module-cdfs \
     kernel-module-sysfillrect \
@@ -78,7 +78,7 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS = "\
     kernel-module-cfg80211 \
     "
 
-MACHINE_EXTRA_RRECOMMENDS += " \
+MACHINE_EXTRA_RRECOMMENDS += "\
     linkdroid-lkdosth \
     libdvbcsa \
     linkdroid-cnim \
