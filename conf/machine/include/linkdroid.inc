@@ -34,6 +34,9 @@ MACHINE_FEATURES = "bluetooth usbhost vfat alsa dvb-c nolcd hdmicec fb skins1080
 DVBPROVIDER = "kernel"
 DVBSKYPROVIDER = "kernel"
 
+PREFERRED_PROVIDER_virtual/kernel = "linux-linkdroid"
+PREFERRED_VERSION_linux-linkdroid = "3.14.29"
+
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS = "\
     linkdroid-autoscript \
     \

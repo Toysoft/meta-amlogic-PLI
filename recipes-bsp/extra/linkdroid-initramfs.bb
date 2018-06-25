@@ -8,7 +8,6 @@ COMPATIBLE_MACHINE = "(alien5|k1pro)"
 PACKAGE_INSTALL = "initramfs-boot-am linkdroid-nftl-dev-alien5 parted e2fsprogs busybox udev base-passwd ${ROOTFS_BOOTSTRAP_INSTALL}"
 
 DEPENDS = "linux-linkdroid"
-DEPENDS_k1pro = "linux-mecool"
 
 IMAGE_FEATURES = ""
 
