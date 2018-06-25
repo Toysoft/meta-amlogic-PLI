@@ -9,7 +9,7 @@ DEPENDS = "lzop-native virtual/${TARGET_PREFIX}gcc"
 
 inherit kernel machine_kernel_pr
 
-MACHINE_KERNEL_PR_append = ".3"
+MACHINE_KERNEL_PR_append = ".4"
 
 EXTRA_OEMAKE_k1pro = "LDFLAGS=''"
 EXTRA_OEMAKE_k2pro = "LDFLAGS=''"
