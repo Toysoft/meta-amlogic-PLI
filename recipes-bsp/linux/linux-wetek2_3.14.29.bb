@@ -1,7 +1,6 @@
 DESCRIPTION = "Amlogic Kernel"
 SECTION = "kernel"
 LICENSE = "GPLv2"
-
 LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 SRC_URI[md5sum] = "a046dea5803c0f935e6ad62f39138857"

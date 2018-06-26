@@ -1247,9 +1247,14 @@ CONFIG_MESON_SUSPEND=y
 CONFIG_GXBB_SUSPEND=y
 
 #
+# AVL6211 dvb driver
+#
+CONFIG_AM_AVL6211=m
+
+#
 # AVL6862 dvb driver
 #
-CONFIG_AVL6862=y
+CONFIG_AVL6862=m
 
 #
 # Amlogic DVB driver
