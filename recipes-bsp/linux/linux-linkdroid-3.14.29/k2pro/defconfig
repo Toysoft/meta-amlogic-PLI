@@ -1249,7 +1249,7 @@ CONFIG_GXBB_SUSPEND=y
 #
 # AVL6211 dvb driver
 #
-CONFIG_AM_AVL6211=m
+# CONFIG_AM_AVL6211 is not set
 
 #
 # AVL6862 dvb driver
