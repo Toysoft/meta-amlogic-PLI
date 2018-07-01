@@ -1199,17 +1199,7 @@
 		status = "okay";
 		/* pinctrl-0 = <&ampanel_pins>; */
 	};
-	
-	lkse2io{
-		compatible = "amlogic,lkse2io";
-		dev_name = "lkse2io";
-//		panel_pinmux_clr_mask = <0x60>;
-		lkse2io_clk_pin = <&gpio  GPIODV_13  GPIO_ACTIVE_HIGH>;
-		lkse2io_dat_pin = <&gpio  GPIODV_14  GPIO_ACTIVE_HIGH>;
-		status = "okay";
-		// pinctrl-0 = <&ampanel_pins>;
-	};
-	
+
 	dvb {
 		compatible = "amlogic, dvb";
 		dev_name = "dvb";
@@ -1239,27 +1229,6 @@
 		fe0_dtv_demod = <0>;
 		fe0_ts = <0>;
 		fe0_dev = <0>;
-		dtv_demod1 = "dm60001";
-		dtv_demod1_i2c_adap_id = <2>;
-		dtv_demod1_i2c_addr = <0x38>;
-		dtv_demod1_reset_value = <0>;
-		dtv_demod1_reset_gpio = <&gpio GPIODV_24 GPIO_ACTIVE_HIGH>;
-		dtv_demod1_lnbpower = <&gpio_ao GPIOAO_6 GPIO_ACTIVE_HIGH>;
-		dtv_demod1_antoverload = <&gpio_ao GPIOAO_5 GPIO_ACTIVE_HIGH>;
-		fe1_dtv_demod = <1>;
-		fe1_ts = <0>;
-		fe1_dev = <1>;
-		dtv_demod2 = "dm60002";
-		dtv_demod2_i2c_adap_id = <2>;
-		dtv_demod2_i2c_addr = <0x38>;
-		dtv_demod2_reset_value = <0>;
-		dtv_demod2_reset_gpio = <&gpio GPIODV_24 GPIO_ACTIVE_HIGH>;
-		dtv_demod2_lnbpower = <&gpio_ao GPIOAO_6 GPIO_ACTIVE_HIGH>;
-		dtv_demod2_antoverload = <&gpio_ao GPIOAO_5 GPIO_ACTIVE_HIGH>;
-		fe2_dtv_demod = <2>;
-		fe2_ts = <0>;
-		fe2_dev = <2>;
-
 	};
     /* SMC */
 	smartcard{

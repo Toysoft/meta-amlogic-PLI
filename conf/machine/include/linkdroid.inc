@@ -1,8 +1,6 @@
 KERNEL_FILE = "kernel.itb"
 ROOTFS_FILE = "rootfs.tar.bz2"
 
-SOC_FAMILY = "AML905D"
-
 # Amlogic defaults
 require conf/machine/include/arm/arch-armv8.inc
 require conf/machine/include/soc-family.inc
@@ -33,9 +31,6 @@ MACHINE_FEATURES = "bluetooth usbhost vfat alsa dvb-c nolcd hdmicec fb skins1080
 
 DVBPROVIDER = "kernel"
 DVBSKYPROVIDER = "kernel"
-
-PREFERRED_PROVIDER_virtual/kernel = "linux-linkdroid"
-PREFERRED_VERSION_linux-linkdroid = "3.14.29"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     linkdroid-autoscript \
