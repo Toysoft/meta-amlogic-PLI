@@ -6,6 +6,8 @@ PRIORITY = "required"
 
 require conf/license/license-gplv2.inc
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 inherit gitpkgv
 
 PV = "git${SRCPV}"

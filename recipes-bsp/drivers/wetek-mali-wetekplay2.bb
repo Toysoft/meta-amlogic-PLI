@@ -4,6 +4,8 @@ PRIORITY = "required"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://Makefile;md5=d0d2f45bce10dd67cca4a749d12e535e"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 COMPATIBLE_MACHINE = "wetekplay2"
 
 SRC_URI[md5sum] = "b849349480679ca6253cf2660e366ec6"
