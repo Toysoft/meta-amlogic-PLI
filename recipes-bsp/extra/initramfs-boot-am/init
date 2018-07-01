@@ -130,14 +130,6 @@ for i in $(cat /proc/cmdline); do
     esac
 done
 
-# FIXME-ce dirty hack to overwrite commandline....
-# need to check for init as well not only device
-#if [ ! -d /dev/mmcblk1p2 ]; then
-if [ "$(blkid | grep ROOTFS | cut -d ':' -f 1)" == "/dev/mmcblk1p2"  ]; then 
-  root="/dev/mmcblk1p2"
-else
-  root="/dev/mmcblk0p2"
-fi
 rootfstype="ext4"
 init="/sbin/init.sysvinit"
 
