@@ -17,6 +17,8 @@ SRC_URI = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=master"
 SRC_URI_alien5 = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=alien5"
 SRC_URI_k1pro = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=alien5"
 SRC_URI_k2pro = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=alien5"
+SRC_URI_k3pro = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=alien5"
+SRC_URI_k1plus = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=alien5"
 
 S = "${WORKDIR}/git"
 
@@ -32,8 +34,10 @@ do_install() {
 	install -m 0644 ${S}/wetek_play2.conf ${D}${sysconfdir}/amremote/wetek.conf
     elif [ "${MACHINE}" = "alien5" ]; then
 	install -m 0644 ${S}/alien5.conf ${D}${sysconfdir}/amremote/remote.conf
-    elif [ "${MACHINE}" = "k1pro" -o "${MACHINE}" = "k2pro" ]; then
+    elif [ "${MACHINE}" = "k1pro" -o "${MACHINE}" = "k2pro" -o "${MACHINE}" = "k3pro" ]; then
 	install -m 0644 ${S}/k1pro.conf ${D}${sysconfdir}/amremote/remote.conf
+    elif [ "${MACHINE}" = "k1plus" ]; then
+	install -m 0644 ${S}/k1plus.conf ${D}${sysconfdir}/amremote/remote.conf
     else
     	install -m 0644 ${S}/wetek.conf ${D}${sysconfdir}/amremote/
     fi
