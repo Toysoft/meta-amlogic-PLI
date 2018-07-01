@@ -15,12 +15,7 @@ PKGV = "git${GITPKGV}"
 
 SRCREV = "${AUTOREV}"
 
-SRC_URI = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=master"
-SRC_URI_alien5 = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=alien5"
-SRC_URI_k1pro = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=alien5"
-SRC_URI_k2pro = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=alien5"
-SRC_URI_k3pro = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=alien5"
-SRC_URI_k1plus = "git://github.com/PLi-metas/amremote.git;protocol=git;branch=alien5"
+SRC_URI = "${@bb.utils.contains("IMAGE_FSTYPES", "alien5sdimg", "git://github.com/PLi-metas/amremote.git;protocol=git;branch=arm64", "git://github.com/PLi-metas/amremote.git;protocol=git;branch=master", d)}"
 
 S = "${WORKDIR}/git"
 
