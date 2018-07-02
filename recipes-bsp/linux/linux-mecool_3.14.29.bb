@@ -9,7 +9,7 @@ DEPENDS = "lzop-native virtual/${TARGET_PREFIX}gcc"
 
 inherit kernel machine_kernel_pr
 
-MACHINE_KERNEL_PR_append = ".6"
+MACHINE_KERNEL_PR_append = ".7"
 
 EXTRA_OEMAKE = "LDFLAGS=''"
 
@@ -41,43 +41,11 @@ do_compile_prepend () {
   cp -fr ${S}/drivers/amlogic/dvb-avl/aml_fe.o  ${B}/drivers/amlogic/dvb-avl/
   cp -fr ${S}/drivers/amlogic/dvb-avl/avl6862.o  ${B}/drivers/amlogic/dvb-avl/
   cp -fr ${S}/drivers/amlogic/dvb-avl/r848a.o  ${B}/drivers/amlogic/dvb-avl/
-  oe_runmake  ${S}/drivers/amlogic/wetek/
-  install -d ${B}/drivers/amlogic/wetek/
-  cp -fr ${S}/drivers/amlogic/wetek/ascot3.o  ${B}/drivers/amlogic/wetek/
-  cp -fr ${S}/drivers/amlogic/wetek/avl6211.o  ${B}/drivers/amlogic/wetek/
-  cp -fr ${S}/drivers/amlogic/wetek/cxd2837.o  ${B}/drivers/amlogic/wetek/
-  cp -fr ${S}/drivers/amlogic/wetek/cxd2841er_wetek.o  ${B}/drivers/amlogic/wetek/
-  cp -fr ${S}/drivers/amlogic/wetek/mn88436.o  ${B}/drivers/amlogic/wetek/
-  cp -fr ${S}/drivers/amlogic/wetek/mxl603.o  ${B}/drivers/amlogic/wetek/
-  cp -fr ${S}/drivers/amlogic/wetek/nimdetect.o  ${B}/drivers/amlogic/wetek/
-  cp -fr ${S}/drivers/amlogic/wetek/wetek_dmx.o  ${B}/drivers/amlogic/wetek/
-  cp -fr ${S}/drivers/amlogic/wetek/wetekdvb.o  ${B}/drivers/amlogic/wetek/
-  cp -fr ${S}/drivers/amlogic/wetek/wetek_dvb.o  ${B}/drivers/amlogic/wetek/
-  cp -fr ${S}/drivers/amlogic/wetek/wetekplay.o  ${B}/drivers/amlogic/wetek/
   install -d ${B}/drivers/amlogic/amports/
   cp -fr ${S}/drivers/amlogic/amports/amstream.o  ${B}/drivers/amlogic/amports/
   install -d ${B}/drivers/amlogic/dvb_tv/
   cp -fr ${S}/drivers/amlogic/dvb_tv/aml.o  ${B}/drivers/amlogic/dvb_tv/
   cp -fr ${S}/drivers/amlogic/dvb_tv/aml_fe.o  ${B}/drivers/amlogic/dvb_tv/
-  oe_runmake  ${S}/drivers/amlogic/dvb_tv/
-  oe_runmake  ${S}/drivers/amlogic/dvb_tv/avl6211/
-  install -d ${B}/drivers/amlogic/dvb_tv/avl6211/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/avl6211_fe.o  ${B}/drivers/amlogic/dvb_tv/avl6211/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/avlfrontend.o  ${B}/drivers/amlogic/dvb_tv/avl6211/
-  install -d ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/src/avl.o  ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/src/avl_dvbsx.o  ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/src/IBase.o  ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/src/IBlindScan.o  ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/src/IBlindscanAPI.o  ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/src/IBSP.o  ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/src/IDiseqc.o  ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/src/II2C.o  ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/src/II2CRepeater.o  ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/src/IRx.o  ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/src/LockSignal_Api.o  ${B}/drivers/amlogic/dvb_tv/avl6211/src/
-  install -d ${B}/drivers/amlogic/dvb_tv/avl6211/AV2011/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/avl6211/AV2011/ExtAV2011.o  ${B}/drivers/amlogic/dvb_tv/avl6211/AV2011/
   install -d ${B}/drivers/media/dvb-core/
   cp -fr ${S}/drivers/media/dvb-core/dvb-core.o  ${B}/drivers/media/dvb-core/
   install -d ${B}/sound/soc/aml/m8/
