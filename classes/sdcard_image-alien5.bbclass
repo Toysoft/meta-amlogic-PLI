@@ -46,7 +46,7 @@ IMAGE_CMD_alien5sdimg () {
 	BOOT_BLOCKS=$(LC_ALL=C parted -s ${SDIMG} unit b print | awk '/ 1 / { print substr($4, 1, length($4 -1)) / 512 /2 }')
 	echo boot_blocks: $BOOT_BLOCKS
 	mkfs.vfat -n "${BOOTDD_VOLUME_ID}" -S 512 -C ${WORKDIR}/boot.img $BOOT_BLOCKS ||true
-	mcopy -o -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-linkdroid-initramfs-${MACHINE}.bin ::kernel.itb
+	mcopy -o -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-linkdroid-initramfs-${MACHINE}.bin ::kernel.itb ||true
 
 	if [ -n ${FATPAYLOAD} ] ; then
 		for entry in ${FATPAYLOAD} ; do
