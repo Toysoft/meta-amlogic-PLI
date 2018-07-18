@@ -1,5 +1,5 @@
 /*
- * arch/arm64/boot/dts/amlogic/gxl_p230_2g.dts
+ * arch/arm64/boot/dts/amlogic/gxm_q200_2g.dts
  *
  * Copyright (C) 2015 Amlogic, Inc. All rights reserved.
  *
@@ -22,12 +22,12 @@
 #include <dt-bindings/gpio/gxl.h>
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/reset/aml_gxl.h>
-#include "mesongxl.dtsi"
+#include "mesongxm.dtsi"
 #include "partition_mbox.dtsi"
 / {
 	model = "Amlogic";
-	compatible = "amlogic, Gxbb";
-	amlogic-dt-id = "gxl_p230_2g";
+	compatible = "amlogic, Gxm";
+	amlogic-dt-id = "gxm_q200_2g";
 	interrupt-parent = <&gic>;
 	#address-cells = <2>;
 	#size-cells = <2>;
@@ -41,7 +41,7 @@
 	};
 	memory@00000000 {
 		device_type = "memory";
-		linux,usable-memory = <0x0 0x100000 0x0 0x7ff00000>;
+		llinux,usable-memory = <0x0 0x00100000 0x0 0x7ff00000>;
 	};
 
 	reserved-memory {
@@ -65,11 +65,12 @@
 			reg = <0x0 0x07300000 0x0 0x100000>;
 			no-map;
 		};
-		fb_reserved:linux,meson-fb {
+
+		/*fb_reserved:linux,meson-fb {
 			compatible = "amlogic, fb-memory";
 			reg = <0x0 0x7e000000 0x0 0x2000000>;
 			no-map;
-		};
+		};*/
 
 		di_reserved:linux,di {
 			compatible = "amlogic, di-mem";
@@ -80,7 +81,7 @@
 
 		ion_reserved:linux,ion-dev {
 			compatible = "amlogic, idev-mem";
-			size = <0x0 0x2000000>;
+			size = <0x0 0x4000000>;
 		};
 
 		/*  vdin0 CMA pool */
@@ -138,7 +139,7 @@
 		compatible = "amlogic, sysled";
 		dev_name = "sysled";
 		status = "okay";
-		//led_gpio = <&gpio GPIODV_24 GPIO_ACTIVE_HIGH>;
+		led_gpio = <&gpio GPIODV_24 GPIO_ACTIVE_HIGH>;
 		led_active_low = <1>;
 	};
 
@@ -149,7 +150,7 @@
 	};
 	meson-fb {
 		compatible = "amlogic, meson-fb";
-		memory-region = <&fb_reserved>;
+		//memory-region = <&fb_reserved>;
 		dev_name = "meson-fb";
 		status = "okay";
 		interrupts = <0 3 1
@@ -159,7 +160,7 @@
 		display_mode_default = "1080p60hz";
 		scale_mode = <1>; /** 0:VPU free scale 1:OSD free scale 2:OSD super scale */
 		display_size_default = <1920 1080 1920 3240 32>; //1920*1080*4*3 = 0x17BB000
-		logo_addr = "0x7f851000";
+		logo_addr = "0x7f851000"; /*ion base + fb0 memory size for uboot logo osd1*/
 	};
 	ge2d {
 		compatible = "amlogic, ge2d";
@@ -401,7 +402,20 @@
 		interrupts = <0 45 1>;
 		interrupt-names = "mailbox_2";
 	};
-
+	hevc_enc{
+		compatible = "cnm, HevcEnc";
+		//memory-region = <&hevc_enc_reserved>;
+		dev_name = "HevcEnc";
+		status = "okay";
+		interrupts = <0 187 1>;
+		interrupt-names = "wave420l_irq";
+		#address-cells=<2>;
+		#size-cells=<2>;
+		ranges;
+		io_reg_base{
+			reg = <0x0 0xc8810000 0x0 0x4000>;
+		};
+	};
 
 	/*vm {
 		compatible = "amlogic, vm";
@@ -512,6 +526,7 @@
 			gpio_dat3 = <&gpio       CARD_4       GPIO_ACTIVE_HIGH>;
 			jtag_pin =  <&gpio       CARD_0       GPIO_ACTIVE_HIGH>;
 			gpio_cd =  <&gpio       CARD_6       GPIO_ACTIVE_HIGH>;
+			card_in_delay = <400>;
 			irq_in = <3>;
 			irq_out = <5>;
 	   		card_type = <5>; /* 0:unknown, 1:mmc card(include eMMC), 2:sd card(include tSD), 3:sdio device(ie:sdio-wifi), 4:SD combo (IO+mem) card, 5:NON sdio device(means sd/mmc card), other:reserved */
@@ -522,7 +537,7 @@
 		dev_name = "aml_newsd.0";
 		status = "okay";
 		reg = <0x0 0xd0070000 0x0 0x2000>;
-		interrupts = <	0 216 4>;
+		interrupts = <	0 216 1>;
 		pinctrl-names =  "sdio_clk_cmd_pins", "sdio_all_pins";
 		pinctrl-0 = <&sdio_clk_cmd_pins>;
 		pinctrl-1 = <&sdio_all_pins>;
@@ -534,7 +549,7 @@
 				"MMC_CAP_SD_HIGHSPEED", "MMC_CAP_NONREMOVABLE",
 				"MMC_CAP_UHS_SDR12","MMC_CAP_UHS_SDR25",
 				"MMC_CAP_UHS_SDR50","MMC_CAP_UHS_SDR104",
-				"MMC_PM_KEEP_POWER","MMC_CAP_SDIO_IRQ";
+				"MMC_PM_KEEP_POWER";
 				f_min = <400000>;
 				f_max = <200000000>;
 				max_req_size = <0x20000>;          /**128KB*/
@@ -775,7 +790,7 @@
 		clock-names = "clk_uart";
 		fifosize = < 64 >;
 		pinctrl-names = "default";
-		//pinctrl-0 = <&b_uart_pins>;
+		pinctrl-0 = <&b_uart_pins>;
 		resets = <&clock GCLK_IDX_UART1>;
 	};
 	uart_C: serial@c1108700 {
@@ -829,7 +844,7 @@
 
 	usb2_phy: usb2phy@d0078000 {
 		compatible = "amlogic, amlogic-new-usb2";
-		portnum = <2>;
+		portnum = <3>;
 		reg = <0x0 0xd0078000 0x0 0x80>;
 	};
 
@@ -837,6 +852,11 @@
 		compatible = "amlogic, amlogic-new-usb3";
 		portnum = <0>;
 		reg = <0x0 0xd0078080 0x0 0x20>;
+		interrupts = <0 16 4>;
+		otg = <1>;
+		gpio-vbus-power = "GPIOAO_5";
+                gpios = <&gpio_ao       GPIOAO_5       GPIO_ACTIVE_HIGH>;
+
 	};
 
 	dwc2_a {
@@ -855,7 +875,7 @@
 		port-id-mode = <0>; /** 0: hardware, 1: sw_host, 2: sw_slave*/
 		usb-fifo = <728>;
 		cpu-type = "gxl";
-		controller-type = <1>; /** 0: normal, 1: otg+dwc3*/
+		controller-type = <3>; /** 0: normal, 1: otg+dwc3 host only, 2: otg+dwc3 device only*/
 		phy-reg = <0xd0078000>;
 		phy-reg-size = <0xa0>;
 		resets = <&clock GCLK_IDX_USB_GENERAL
@@ -898,7 +918,6 @@
 		clocks = <&clock CLK_MPLL2>,
 			<&clock CLK_AMCLK>;
 		clock-names = "mpll2", "mclk";
-		//DMIC;
 		compatible = "amlogic, aml-i2s-dai";
 	};
 	spdif_dai: SPDIF {
@@ -927,7 +946,7 @@
 			<&clock CLK_PCM_MCLK>,
 			<&clock CLK_PCM_SCLK>;
 		clock-names = "mpll0", "pcm_mclk", "pcm_sclk";
-		pcm_mode = <1>;	/* 0=slave mode, 1=master mode */
+		pcm_mode = <1>; /* 0=slave mode, 1=master mode */
 	};
 	i2s_plat: i2s_platform {
 		compatible = "amlogic, aml-i2s";
@@ -960,35 +979,6 @@
 		reg = <0x0 0xc8832000 0x0 0x14>;
 		status = "okay";
 	};
-
-	dmic:snd_dmic {
-		#sound-dai-cells = <0>;
-		compatible = "aml, aml_snd_dmic";
-		reg = <0x0 0xd0042000 0x0 0x2000>;
-		status = "okay";
-		resets = <
-			&clock GCLK_IDX_PDM
-		>;
-		reset-names =	"pdm";
-		pinctrl-names = "aml_dmic_pins";
-		pinctrl-0 = <&aml_dmic>;
-		clocks = <&clock CLK_PDM>,
-			<&clock CLK_AMCLK>;
-		clock-names = "pdm", "mclk";
-	};
-
-	tlv320aic32x4_codec:ti{
-		#sound-dai-cells = <0>;
-		compatible = "amlogic, ti_codec_tlv320aic32x4";
-		codec_name = "tlv320aic32x4";
-		status = "okay";
-		i2c_addr = <0x18>;
-		i2c_bus = "i2c_bus_ao";
-		reset_pin = <&gpio_ao GPIOAO_9 0>;
-		id_reg = <0x03>;
-		id_val = <0x00>;
-	};
-
 	aml_m8_snd {
 		compatible = "aml, aml_snd_m8";
 		status = "okay";
@@ -1001,11 +991,9 @@
 		mute_gpio-gpios = <&gpio GPIOH_5 0>;
 		mute_inv;
 		hp_disable;
-		sleep_time = <100>;
 		hp_paraments = <800 300 0 5 1>;
 		pinctrl-names = "aml_snd_m8";
 		pinctrl-0 = <&audio_pins>;
-		//multi_dev = "tlv320aic32x4";
 		cpu_list = <&cpudai0 &cpudai1 &cpudai2>;
 		codec_list = <&codec0 &codec1 &codec2>;
 		plat_list = <&i2s_plat &i2s_plat &pcm_plat>;
@@ -1020,7 +1008,6 @@
 		};
 		codec0: codec0 {
 			sound-dai = <&amlogic_codec>;
-			//sound-dai = <&tlv320aic32x4_codec>;
 		};
 		codec1: codec1 {
 			sound-dai = <&spdif_codec>;
@@ -1051,7 +1038,14 @@
 				min_state = <1000000>;
 				dyn_coeff = <140>;
 				cluster_id = <0>;
-				node_name = "cpus";
+				node_name = "cluster0";
+				device_type = "cpufreq";
+			};
+			cpufreq_cool_cluster1 {
+				min_state = <500000>;
+				dyn_coeff = <140>;
+				cluster_id = <1>;
+				node_name = "cluster1";
 				device_type = "cpufreq";
 			};
 			cpucore_cool_cluster0 {
@@ -1061,11 +1055,18 @@
 				node_name = "cpu_core_cluster0";
 				device_type = "cpucore";
 			};
+			cpucore_cool_cluster1 {
+				min_state = <1>;
+				dyn_coeff = <0>;
+				cluster_id = <1>;
+				node_name = "cpu_core_cluster1";
+				device_type = "cpucore";
+			};
 			gpufreq_cool {
 				min_state = <400>;
 				dyn_coeff = <437>;
 				cluster_id = <0>;
-				node_name = "mali";
+				node_name = "t82x";
 				device_type = "gpufreq";
 			};
 			gpucore_cool {
@@ -1079,6 +1080,9 @@
 		cpu_cluster0:cpu_core_cluster0 {
 			#cooling-cells = <2>; /* min followed by max */
 		};
+		cpu_cluster1:cpu_core_cluster1 {
+			#cooling-cells = <2>; /* min followed by max */
+		};
 		gpucore:thermal_gpu_cores {
 			#cooling-cells = <2>; /* min followed by max */
 		};
@@ -1087,7 +1091,7 @@
 		soc_thermal {
 			polling-delay = <1000>;
 			polling-delay-passive = <100>;
-			sustainable-power = <2150>;
+			sustainable-power = <2450>;
 
 			thermal-sensors = <&aml_sensor0 3>;
 
@@ -1115,19 +1119,29 @@
 			};
 
 			cooling-maps {
-				cpufreq_cooling_map {
+				cpufreq_cooling_map0 {
 					trip = <&control>;
-					cooling-device = <&cpus 0 4>;
+					cooling-device = <&cluster0 0 4>;
 					contribution = <1024>;
 				};
-				cpucore_cooling_map {
+				cpufreq_cooling_map1 {
+					trip = <&control>;
+					cooling-device = <&cluster1 0 4>;
+					contribution = <1024>;
+				};
+				cpucore_cooling_map0 {
 					trip = <&control>;
 					cooling-device = <&cpu_cluster0 0 3>;
 					contribution = <1024>;
 				};
+				cpucore_cooling_map1 {
+					trip = <&control>;
+					cooling-device = <&cpu_cluster1 0 3>;
+					contribution = <1024>;
+				};
 				gpufreq_cooling_map {
 					trip = <&control>;
-					cooling-device = <&gpu 0 4>;
+					cooling-device = <&t82x_gpu 0 4>;
 					contribution = <1024>;
 				};
 				gpucore_cooling_map {
@@ -1138,78 +1152,16 @@
 			};
 		};
 	};
-	/* dvb {
-		compatible = "amlogic, dvb";
-		dev_name = "dvb";
-		ts1 = "serial";
-		ts1_control = <0x800>;
-		ts1_invert = <0>;
-		ts_out_invert = <0>;
-		pinctrl-names = "p_ts1", "s_ts1";
-		pinctrl-0 = <&dvb_p_ts1_pins>;
-		pinctrl-1 = <&dvb_s_ts1_pins>;
-		resets = <&clock GCLK_IDX_DEMUX
-				&clock GCLK_IDX_ASYNC_FIFO
-				&clock GCLK_IDX_AHB_ARB0
-				&clock GCLK_IDX_HIU_PARSER_TOP>;
-		reset-names = "demux", "asyncfifo", "ahbarb0", "uparsertop";
-	}; */
-	/* dvbfe {
-		compatible = "amlogic, dvbfe";
-		dev_name = "dvbfe";
-		dtv_demod0 = "Avl6211";
-		dtv_demod0_i2c_adap_id = <2>;
-		dtv_demod0_i2c_addr = <0xc6>;
-		dtv_demod0_reset_value = <0>;
-		dtv_demod0_reset_gpio = <&gpio GPIOZ_15 GPIO_ACTIVE_HIGH>;
-		fe0_dtv_demod = <0>;
-		fe0_ts = <1>;
-		fe0_dev = <0>;
-	}; */
-
-	//dvbci {
-	//	compatible = "amlogic, dvbci";
-	//	dev_name = "dvbci";
-	//	io_type = <1>; /* 0=iobus,1=spi*/
-  //      interrupts = <	0 70 1 >;
-	//	dvbci_io {
-	//		reset_pin = <&gpio GPIODV_12 GPIO_ACTIVE_HIGH>;
-	//		cd_pin1 = <&gpio GPIODV_24 GPIO_ACTIVE_HIGH>;
-	//		cd_pin2 = <&gpio GPIODV_24 GPIO_ACTIVE_HIGH>;
-	//		pwr_pin  = <&gpio GPIODV_11 GPIO_ACTIVE_HIGH>;
-	//		irq_cam_pin = <&gpio GPIODV_28 GPIO_ACTIVE_HIGH>;
-	//		ex_tsin_en_pin = <&gpio GPIODV_25 GPIO_ACTIVE_HIGH>;
-	//		irq_cd1 = <6>;
-			/*below is spi config,*/
-		    /*if use iobus you need add iobus config below */
-	//		spi_bus_num = <0>;
-	//		spi_chip_select = <0>;
-	//		spi_max_frequency = <300000>; /* unit: hz */
-	//		spi_mode = <3>; /* mode: 0, 1, 2, 3 */
-	//		spi_cs_delay = <10 100>; /* hold_high_delay, clk_cs_delay (unit: us) */
-	//		spi_write_check = <0>; /* 0=disable, 1=enable */
-	//	};
-	//};
 	ampanel{
 		compatible = "amlogic,ampanel";
 		dev_name = "ampanel";
 //		panel_pinmux_clr_mask = <0x60>;
-		panel_clk_pin = <&gpio  GPIODV_16  GPIO_ACTIVE_HIGH>;
-		panel_dat_pin = <&gpio  GPIODV_17  GPIO_ACTIVE_HIGH>;
+		panel_clk_pin = <&gpio  GPIODV_19  GPIO_ACTIVE_HIGH>;
+		panel_dat_pin = <&gpio  GPIODV_18  GPIO_ACTIVE_HIGH>;
 		status = "okay";
 		/* pinctrl-0 = <&ampanel_pins>; */
-	};
-	
-	lkse2io{
-		compatible = "amlogic,lkse2io";
-		dev_name = "lkse2io";
-//		panel_pinmux_clr_mask = <0x60>;
-		lkse2io_clk_pin = <&gpio  GPIODV_13  GPIO_ACTIVE_HIGH>;
-		lkse2io_dat_pin = <&gpio  GPIODV_14  GPIO_ACTIVE_HIGH>;
-		status = "okay";
-		// pinctrl-0 = <&ampanel_pins>;
-	};
-	
+	};    
+
 	dvb {
 		compatible = "amlogic, dvb";
 		dev_name = "dvb";
@@ -1218,7 +1170,7 @@
 		ts0_control = <0>;
 		ts0_invert = <0>;
 		pinctrl-names = "p_ts0";//"p_ts0","s_ts0";
-		pinctrl-0 = <&dvb_p_ts0_pins>;
+//		pinctrl-0 = <&dvb_p_ts0_pins>;
 //		pinctrl-1 = <&dvb_s_ts0_pins>;
 		resets = <&clock GCLK_IDX_DEMUX
 				&clock GCLK_IDX_ASYNC_FIFO
@@ -1239,66 +1191,8 @@
 		fe0_dtv_demod = <0>;
 		fe0_ts = <0>;
 		fe0_dev = <0>;
-		dtv_demod1 = "dm60001";
-		dtv_demod1_i2c_adap_id = <2>;
-		dtv_demod1_i2c_addr = <0x38>;
-		dtv_demod1_reset_value = <0>;
-		dtv_demod1_reset_gpio = <&gpio GPIODV_24 GPIO_ACTIVE_HIGH>;
-		dtv_demod1_lnbpower = <&gpio_ao GPIOAO_6 GPIO_ACTIVE_HIGH>;
-		dtv_demod1_antoverload = <&gpio_ao GPIOAO_5 GPIO_ACTIVE_HIGH>;
-		fe1_dtv_demod = <1>;
-		fe1_ts = <0>;
-		fe1_dev = <1>;
-		dtv_demod2 = "dm60002";
-		dtv_demod2_i2c_adap_id = <2>;
-		dtv_demod2_i2c_addr = <0x38>;
-		dtv_demod2_reset_value = <0>;
-		dtv_demod2_reset_gpio = <&gpio GPIODV_24 GPIO_ACTIVE_HIGH>;
-		dtv_demod2_lnbpower = <&gpio_ao GPIOAO_6 GPIO_ACTIVE_HIGH>;
-		dtv_demod2_antoverload = <&gpio_ao GPIOAO_5 GPIO_ACTIVE_HIGH>;
-		fe2_dtv_demod = <2>;
-		fe2_ts = <0>;
-		fe2_dev = <2>;
-
 	};
-    /* SMC */
-	smartcard{
-		compatible = "amlogic,smartcard";
-		irq_trigger_type = "GPIO_IRQ_LOW";
 
-		reset_pin-gpios = <&gpio GPIODV_21 GPIO_ACTIVE_HIGH >;	//Reset pin
-		detect_pin-gpios = <&gpio GPIODV_20 GPIO_ACTIVE_HIGH >;	//Detect pin
-		enable_5v3v_pin-gpios = <&gpio GPIODV_19 GPIO_ACTIVE_HIGH >;	//5V3V pin, can be ignored
-		enable_pin-gpios = <&gpio GPIODV_18 GPIO_ACTIVE_HIGH >;	//enable pin
-
-		interrupts = <0 69 4 >;	//smc irq
-
-		smc0_clock_source = <0 >;	//Smc clock source, if change this, you must adjust clk and divider in smartcard.c
-		smc0_irq = <69 >;		//smc irq
-		smc0_det_invert = <1 >;	//0: high voltage on detect pin indicates card in.
-		smc0_5v3v_level = <0 >;
-		smc0_enable_level = <1>;
-		smc_need_enable_pin = "yes";	//Ordinarily, smartcard controller needs a enable pin.
-									//if board	controls smartcard directly, then we don 't need it.
-		reset_level = <0>;					//0: pull low reset pin to reset card
-
-		smc0_clk_pinmux_reg = <0x30>;
-		smc0_clk_pinmux_bit = <0x80>;
-
-		smc0_clk_oen_reg = <0x200f>;
-		smc0_clk_out_reg = <0x2010>;
-
-		smc0_clk_bit = <0x2000>;
-		smc0_clk_oebit = <0x2000000>;
-		smc0_clk_oubit = <0x1000000>;
-
-		pinctrl-names = "default";
-		pinctrl-0 = <&smc_pins>;
-		resets = <&clock GCLK_IDX_SMART_CARD_MPEG_DOMAIN>;
-		reset-names = "smartcard";
-
-		status = "okay";
-	};
 };
 /*&i2c_a {
   status = "disabled";
@@ -1312,15 +1206,6 @@
 		amlogic,setmask=<6 0x7800000>;
 		amlogic,clrmask=<6 0x07e0000>;
 		amlogic,pins = "GPIOH_6","GPIOH_7","GPIOH_8","GPIOH_9";
-		/*
-		amlogic,setmask=<6 0x7800000
-						 3 0x38000000>;
-		amlogic,clrmask=<6 0x07e0000
-						 3 0x19800
-						 4 0x1c0000
-						 AO 0x50000>;//for 4 i2s in interface
-		amlogic,pins = "GPIOH_6","GPIOH_7","GPIOH_8","GPIOH_9", "GPIOAO_6", "GPIOZ_2", "GPIOZ_3","GPIOZ_4";
-		*/
 	};
 
 	audio_spdif_pins:audio_pin1{
@@ -1335,30 +1220,16 @@
 		amlogic,clrmask=<5 0x3c33>;
 		amlogic,pins ="GPIOX_8", "GPIOX_9", "GPIOX_10", "GPIOX_11";
 	};
-
-	aml_dmic:audio_dmic{
-		amlogic,setmask=<2 0xc0>;
-		amlogic,clrmask=<1 0x60c000
-						 2 0x18000
-						 3 0x18>;
-		amlogic,pins = "GPIODV_24","GPIODV_25";
-	};
-
-/* SMC */
-	smc_pins:smc_pins {							//Set gpio to 7816-clk 7816-data mode.
-		amlogic,setmask = <2 0x60000>;       //Please refer to core-pin mux document
-		amlogic,clrmask = <3 0x20
-		                   1 0x2000000>;
-		amlogic,pins = "GPIODV_22","GPIODV_23";
-	};
-
 };
 &efuse {
-	status = "okay";
+	status = "ok";
 };
 &audio_data{
 	status = "okay";
 };
 &defendkey {
 	status = "okay";
+};
+&t82x_gpu {
+        tbl = <&dvfs285_cfg &dvfs400_cfg &dvfs500_cfg &dvfs666_cfg &dvfs666_cfg>;
 };

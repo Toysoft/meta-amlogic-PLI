@@ -4,12 +4,12 @@ PRIORITY = "required"
 LICENSE = "CLOSED"
 require conf/license/license-close.inc
 
-COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro)"
+COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro|k3pro|k1plus)"
 
 DEPENDS = "virtual/${TARGET_PREFIX}gcc"
 
 KV = "3.14.29"
-SRCDATE = "20180418"
+SRCDATE = "20180712"
 
 PV = "${KV}+${SRCDATE}"
 

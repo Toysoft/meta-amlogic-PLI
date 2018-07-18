@@ -1,20 +1,20 @@
 SUMMARY = "Amlogic codecs library"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro)"
+COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro|k3pro|k1plus)"
 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRCDATE = "20180531"
+SRCDATE = "20180712"
 
 DEPENDS = "linkdroid-libamadec-alien5"
 RDEPENDS_${PN} = "linkdroid-libamadec-alien5"
 
 inherit lib_package pkgconfig
 
-SRC_URI[md5sum] = "d2af892823d3e0ee25207a0c6aac7878"
-SRC_URI[sha256sum] = "1f9b9fb5026676bc9d241b9790da96d94721d8e375b07ab97637410d64c45a4b"
+SRC_URI[md5sum] = "268c90e6d9884b284188aa4031e101dd"
+SRC_URI[sha256sum] = "57d4a67b4114ee4ee19aaa5d6c23d2ab0b9f61de7201bbfb5071c7be780d90bd"
 
 SRC_URI = "http://source.mynonpublic.com/linkdroid/${BPN}-${SRCDATE}.zip"
 

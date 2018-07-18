@@ -1,17 +1,19 @@
-DESCRIPTION = "Linux kernel for the linkdroid device"
+DESCRIPTION = "Linux kernel for the mecool device"
 SECTION = "kernel"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "alien5"
+COMPATIBLE_MACHINE = "k1pro|k2pro|k3pro|k1plus"
 
 DEPENDS = "lzop-native virtual/${TARGET_PREFIX}gcc"
 
 inherit kernel machine_kernel_pr
 
-MACHINE_KERNEL_PR_append = ".6"
+MACHINE_KERNEL_PR_append = ".8"
+
+EXTRA_OEMAKE = "LDFLAGS=''"
 
 LOCALVERSION ?= ""
 SRCDATE = "20180531"
@@ -22,6 +24,7 @@ SRC_URI[sha256sum] = "7160060b83e4523fed9e5b7070f9f772d74b638d55216643ae83f8a26c
 SRC_URI += "http://source.mynonpublic.com/linkdroid/linux-${PV}-${SRCDATE}.tar.gz \
     file://defconfig \
     file://${MACHINE}.dts \
+    file://avl.patch \
 "
 
 S = "${WORKDIR}/common"
@@ -32,15 +35,19 @@ do_configure_prepend () {
 }
 
 do_compile_prepend () {
+  oe_runmake  ${S}/drivers/amlogic/dvb-avl/
+  install -d ${B}/drivers/amlogic/dvb-avl/
+  cp -fr ${S}/drivers/amlogic/dvb-avl/aml.o  ${B}/drivers/amlogic/dvb-avl/
+  cp -fr ${S}/drivers/amlogic/dvb-avl/aml_dmx.o  ${B}/drivers/amlogic/dvb-avl/
+  cp -fr ${S}/drivers/amlogic/dvb-avl/aml_dvb.o  ${B}/drivers/amlogic/dvb-avl/
+  cp -fr ${S}/drivers/amlogic/dvb-avl/aml_fe.o  ${B}/drivers/amlogic/dvb-avl/
+  cp -fr ${S}/drivers/amlogic/dvb-avl/avl6862.o  ${B}/drivers/amlogic/dvb-avl/
+  cp -fr ${S}/drivers/amlogic/dvb-avl/r848a.o  ${B}/drivers/amlogic/dvb-avl/
   install -d ${B}/drivers/amlogic/amports/
   cp -fr ${S}/drivers/amlogic/amports/amstream.o  ${B}/drivers/amlogic/amports/
   install -d ${B}/drivers/amlogic/dvb_tv/
   cp -fr ${S}/drivers/amlogic/dvb_tv/aml.o  ${B}/drivers/amlogic/dvb_tv/
   cp -fr ${S}/drivers/amlogic/dvb_tv/aml_fe.o  ${B}/drivers/amlogic/dvb_tv/
-  install -d ${B}/drivers/amlogic/dvb_tv/smartcard
-  cp -fr ${S}/drivers/amlogic/dvb_tv/smartcard/smartcard.o  ${B}/drivers/amlogic/dvb_tv/smartcard/
-  install -d ${B}/drivers/amlogic/dvb_tv/dm6k/
-  cp -fr ${S}/drivers/amlogic/dvb_tv/dm6k/dm6000_fe.o  ${B}/drivers/amlogic/dvb_tv/dm6k/
   install -d ${B}/drivers/media/dvb-core/
   cp -fr ${S}/drivers/media/dvb-core/dvb-core.o  ${B}/drivers/media/dvb-core/
   install -d ${B}/sound/soc/aml/m8/
@@ -69,7 +76,6 @@ do_compile_prepend () {
   mkdir -p ${B}/arch/arm64/boot/dts/amlogic/
   fi
 }
-
 
 do_compile_append() {
     cp ${B}/arch/arm64/boot/dts/amlogic/${MACHINE}.dtb ${B}/arch/arm64/boot/
