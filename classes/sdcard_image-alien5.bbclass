@@ -44,23 +44,24 @@ IMAGE_CMD_alien5sdimg () {
 	parted ${SDIMG} print
 
 	BOOT_BLOCKS=$(LC_ALL=C parted -s ${SDIMG} unit b print | awk '/ 1 / { print substr($4, 1, length($4 -1)) / 512 /2 }')
-	mkfs.vfat -n "${BOOTDD_VOLUME_ID}" -S 512 -C ${WORKDIR}/boot.img $BOOT_BLOCKS
-	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-linkdroid-initramfs-${MACHINE}.bin ::kernel.itb
+	echo boot_blocks: $BOOT_BLOCKS
+	mkfs.vfat -n "${BOOTDD_VOLUME_ID}" -S 512 -C ${WORKDIR}/boot.img $BOOT_BLOCKS ||true
+	mcopy -o -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-linkdroid-initramfs-${MACHINE}.bin ::kernel.itb ||true
 
 	if [ -n ${FATPAYLOAD} ] ; then
 		for entry in ${FATPAYLOAD} ; do
 				# add the || true to stop aborting on vfat issues like not supporting .~lock files
-				mcopy -i ${WORKDIR}/boot.img -s -v ${IMAGE_ROOTFS}$entry :: || true
+				mcopy -o -i ${WORKDIR}/boot.img -s -v ${IMAGE_ROOTFS}$entry :: || true
 		done
 	fi
 
 	echo "This marks the first boot" > ${WORKDIR}/first-boot
-	mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/first-boot ::
+	mcopy -o -i ${WORKDIR}/boot.img -v ${WORKDIR}/first-boot ::
 
-	mcopy -i ${WORKDIR}/boot.img -v ${DEPLOY_DIR_IMAGE}/aml_autoscript ::
+	mcopy -o -i ${WORKDIR}/boot.img -v ${DEPLOY_DIR_IMAGE}/aml_autoscript ::
 
 	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${WORKDIR}/image-version-info
-	mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/image-version-info ::
+	mcopy -o -i ${WORKDIR}/boot.img -v ${WORKDIR}/image-version-info ::
 
 	dd if=${WORKDIR}/boot.img of=${SDIMG} conv=notrunc seek=1 bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && sync && sync
 	tune2fs -L  ROOTFS ${SDIMG_ROOTFS}
