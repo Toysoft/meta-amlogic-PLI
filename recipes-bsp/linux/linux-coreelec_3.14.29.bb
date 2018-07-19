@@ -36,18 +36,7 @@ SRC_URI += " \
 SRC_URI[sha256sum] = "4446b76bf4caed6411bf2b0459fa200ce2632fdf7bd74c900d85ce6148bf9fc2"
 
 do_compile_append() {
-  mkdir -p ${B}/arch/arm64/boot/dts/amlogic/
   install -m 0644 ${WORKDIR}/gxbb_p200_k2_pro.dts ${S}/arch/arm64/boot/dts/amlogic/gxbb_p200_k2_pro.dts
   oe_runmake gxbb_p200_k2_pro.dtb
   cp ${B}/arch/arm64/boot/dts/amlogic/gxbb_p200_k2_pro.dtb ${B}/arch/arm64/boot/
 }
-
-inherit deploy
-
-do_deploy_append() {
-  install -d ${DEPLOYDIR}
-  install ${B}/arch/arm64/boot/dts/amlogic/gxbb_p200_k2_pro.dtb ${DEPLOYDIR}/.
-}
-
-
-

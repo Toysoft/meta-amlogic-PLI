@@ -24,7 +24,7 @@ KERNEL_IMAGETYPE = "fitImage"
 UBOOT_ENTRYPOINT = "0x01080000"
 UBOOT_LOADADDRESS = "0x01080000"
 
-#INITRAMFS_IMAGE = "linkdroid-initramfs"
+INITRAMFS_IMAGE = "linkdroid-initramfs"
 
 MACHINE_FEATURES = "bluetooth usbhost vfat alsa dvb-c nolcd hdmicec fb skins1080 emmc aml-plugins"
 #MACHINE_FEATURES = "kodi"
