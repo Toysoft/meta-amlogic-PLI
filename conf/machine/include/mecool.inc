@@ -42,7 +42,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     linkdroid-libamavutils-alien5 \
     linkdroid-libamadec-alien5 \
     linkdroid-libamcodec-alien5 \
-    linkdroid-amlsetfb \
+    mecool-amlsetfb \
     \
     kernel-modules \
     amremote \
@@ -77,7 +77,7 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     libdvbcsa \
     "
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " ${@bb.utils.contains('MACHINE_FEATURES', 'fb', 'linkdroid-amlsetfb', '', d)}"
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " ${@bb.utils.contains('MACHINE_FEATURES', 'fb', 'mecool-amlsetfb', '', d)}"
 
 PREFERRED_PROVIDER_virtual/libgles1 = "linkdroid-opengl-amlogic"
 PREFERRED_PROVIDER_virtual/libgles2 = "linkdroid-opengl-amlogic"
