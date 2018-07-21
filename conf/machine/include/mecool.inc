@@ -34,7 +34,6 @@ DVBSKYPROVIDER = "kernel"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     linkdroid-autoscript \
-    \
     linkdroid-mali-alien5 \
     linkdroid-gst-amlavsink1 \
     gst-app \
@@ -48,10 +47,9 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     amremote \
     linkdroid-opengl-amlogic \
     \
-    linkdroid-stb-alien5 \
+    mecool-e2-procfs \
     linkdroid-libavlib-audio-so-alien5 \
     libmad \
-    linkdroid-extra-alien5 \
     "
 
 ## TODO:     8189es builitin with cfg80211
