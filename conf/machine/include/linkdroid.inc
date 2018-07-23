@@ -13,7 +13,6 @@ require conf/machine/include/soc-family.inc
 IMAGE_CLASSES += "sdcard_image-alien5"
 SDCARD_ROOTFS ?= "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4"
 IMAGE_FSTYPES ?= "ext4 alien5sdimg"
-#IMAGE_ROOTFS_SIZE = "976562"
 IMAGE_ROOTFS_SIZE = "476562"
 IMAGE_EXTRA_SPACE = "0"
 IMAGE_OVERHEAD_FACTOR = "1.0"
@@ -32,14 +31,12 @@ UBOOT_LOADADDRESS = "0x01080000"
 INITRAMFS_IMAGE = "linkdroid-initramfs"
 
 MACHINE_FEATURES = "bluetooth usbhost vfat alsa dvb-c nolcd hdmicec fb skins1080 emmc aml-plugins"
-#MACHINE_FEATURES = "kodi"
 
 DVBPROVIDER = "kernel"
 DVBSKYPROVIDER = "kernel"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     linkdroid-autoscript \
-    \
     linkdroid-mali-alien5 \
     linkdroid-gst-amlavsink1 \
     gst-app \
@@ -47,12 +44,9 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     linkdroid-libamavutils-alien5 \
     linkdroid-libamadec-alien5 \
     linkdroid-libamcodec-alien5 \
-    linkdroid-amlsetfb \
-    \
     kernel-modules \
     amremote \
     linkdroid-opengl-amlogic \
-    \
     linkdroid-stb-alien5 \
     linkdroid-libavlib-audio-so-alien5 \
     libmad \
@@ -77,7 +71,6 @@ KERNEL_MODULE_AUTOLOAD += "\
 
 ### TODO:     8189es builitin with cfg80211
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
-     \
     kernel-module-cdfs \
     kernel-module-sysfillrect \
     kernel-module-syscopyarea \
@@ -99,7 +92,7 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     linkdroid-cnim \
     "
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " ${@bb.utils.contains('MACHINE_FEATURES', 'fb', 'linkdroid-amlsetfb', '', d)}"
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "${@bb.utils.contains('MACHINE_FEATURES', 'fb', 'linkdroid-amlsetfb', '', d)}"
 
 PREFERRED_PROVIDER_virtual/libgles1 = "linkdroid-opengl-amlogic"
 PREFERRED_PROVIDER_virtual/libgles2 = "linkdroid-opengl-amlogic"
