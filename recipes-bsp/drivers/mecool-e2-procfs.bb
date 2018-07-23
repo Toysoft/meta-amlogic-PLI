@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "k2pro_s905"
 
-SRC_URI[sha256sum] = "00243d07c121143ca1182ff98d137ea29d061df93bda5e4dd6c41cc741407d29"
+SRC_URI[sha256sum] = "030d90cfb63e2285d47ab9037f2df48f68b865ffb98712e51c8ecd7ab977fffe"
 
 SRC_URI = "https://github.com/PLi-metas/amlogic-e2-procfs/archive/master.tar.gz"
 
