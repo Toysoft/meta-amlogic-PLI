@@ -2,17 +2,17 @@ SUMMARY = "Mecool e2-procfs for ${MACHINE}"
 SECTION = "base"
 PRIORITY = "required"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://${WORKDIR}/amlogic-e2-procfs-master/LICENSE;md5=d32239bcb673463ab874e80d47fae504"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "k1pro|k2pro_s905D|k3pro|k1plus|k2pro_s905"
 
-SRC_URI[sha256sum] = "030d90cfb63e2285d47ab9037f2df48f68b865ffb98712e51c8ecd7ab977fffe"
+SRCREV = "${AUTOREV}"
 
-SRC_URI = "https://github.com/PLi-metas/amlogic-e2-procfs/archive/master.tar.gz"
+SRC_URI = "git://github.com/PLi-metas/amlogic-e2-procfs.git;protocol=git"
 
-S = "${WORKDIR}/amlogic-e2-procfs-master/source/e2_procfs"
+S = "${WORKDIR}/git/source/e2_procfs"
 
 inherit module
 
