@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/amlogic-e2-procfs-master/LICENSE;md5=d3223
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "k2pro_s905"
+COMPATIBLE_MACHINE = "k1pro|k2pro_s905D|k3pro|k1plus|k2pro_s905"
 
 SRC_URI[sha256sum] = "030d90cfb63e2285d47ab9037f2df48f68b865ffb98712e51c8ecd7ab977fffe"
 
