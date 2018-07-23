@@ -13,7 +13,8 @@ inherit autotools pkgconfig
 DEPENDS = "gstreamer libamcodec libamavutils"
 DEPENDS_alien5 = "gstreamer linkdroid-libamcodec-${MACHINE} linkdroid-libamavutils-${MACHINE}"
 DEPENDS_k1pro = "gstreamer linkdroid-libamcodec-alien5 linkdroid-libamavutils-alien5"
-DEPENDS_k2pro = "gstreamer linkdroid-libamcodec-alien5 linkdroid-libamavutils-alien5"
+DEPENDS_k2pro_s905 = "gstreamer linkdroid-libamcodec-alien5 linkdroid-libamavutils-alien5"
+DEPENDS_k2pro_s905D = "gstreamer linkdroid-libamcodec-alien5 linkdroid-libamavutils-alien5"
 DEPENDS_k3pro = "gstreamer linkdroid-libamcodec-alien5 linkdroid-libamavutils-alien5"
 DEPENDS_k1plus = "gstreamer linkdroid-libamcodec-alien5 linkdroid-libamavutils-alien5"
 

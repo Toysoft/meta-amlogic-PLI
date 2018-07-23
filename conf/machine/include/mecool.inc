@@ -1,6 +1,11 @@
 KERNEL_FILE = "kernel.itb"
 ROOTFS_FILE = "rootfs.tar.bz2"
 
+PREFERRED_PROVIDER_virtual/kernel = "linux-coreelec"
+PREFERRED_VERSION_linux-coreelec = "3.14.29%"
+
+MACHINEKERNEL = "coreelec"
+
 # Amlogic defaults
 require conf/machine/include/arm/arch-armv8.inc
 require conf/machine/include/soc-family.inc
@@ -50,7 +55,29 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     mecool-e2-procfs \
     linkdroid-libavlib-audio-so-alien5 \
     libmad \
+    kernel-module-aml \
+    kernel-module-aml-fe \
+    kernel-module-avl6862 \
+    kernel-module-r848a \
     "
+	
+KERNEL_MODULE_AUTOLOAD += "\
+    e2_procfs \
+    mali \
+    rfcomm \
+    hidp \
+    bluetooth \
+    6lowpan-iphc \
+    libcrc32c \
+    mceusb \
+    rc-core \
+    cfg80211 \
+    8189es \
+    aml \
+    aml_fe \
+    avl6862 \
+    r848a \
+"
 
 ## TODO:     8189es builitin with cfg80211
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
@@ -69,10 +96,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
     kernel-module-xfs \
     kernel-module-8189es \
     kernel-module-cfg80211 \
-    "
-
-MACHINE_EXTRA_RRECOMMENDS += "\
-    libdvbcsa \
     "
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " ${@bb.utils.contains('MACHINE_FEATURES', 'fb', 'mecool-amlsetfb', '', d)}"

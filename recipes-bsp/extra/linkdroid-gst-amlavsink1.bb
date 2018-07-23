@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 PR = "r1"
 
-COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro|k3pro|k1plus)"
+COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro_s905|k2pro_s905D|k3pro|k1plus)"
 
 inherit autotools pkgconfig
 

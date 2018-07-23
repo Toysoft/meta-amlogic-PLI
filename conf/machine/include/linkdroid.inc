@@ -1,6 +1,11 @@
 KERNEL_FILE = "kernel.itb"
 ROOTFS_FILE = "rootfs.tar.bz2"
 
+PREFERRED_PROVIDER_virtual/kernel = "linux-linkdroid"
+PREFERRED_VERSION_linux-linkdroid = "3.14.29"
+
+MACHINEKERNEL = "linkdroid"
+
 # Amlogic defaults
 require conf/machine/include/arm/arch-armv8.inc
 require conf/machine/include/soc-family.inc
@@ -53,6 +58,22 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     libmad \
     linkdroid-extra-alien5 \
     "
+	
+KERNEL_MODULE_AUTOLOAD += "\
+    se2io_se \
+    ampanel \
+    a5stb \
+    mali \
+    rfcomm \
+    hidp \
+    bluetooth \
+    6lowpan-iphc \
+    libcrc32c \
+    mceusb \
+    rc-core \
+    cfg80211 \
+    8189es \
+"
 
 ### TODO:     8189es builitin with cfg80211
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
@@ -75,7 +96,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
 
 MACHINE_EXTRA_RRECOMMENDS += "\
     linkdroid-lkdosth \
-    libdvbcsa \
     linkdroid-cnim \
     "
 
