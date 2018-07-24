@@ -36,6 +36,12 @@
 		fe0_ts = <0>;
 		fe0_dev = <0>;
 	};
+	meson-remote {
+		status = "ok";
+	};
+	meson-ir {
+		status = "disabled";
+	};
 };
 
 &pinmux {
