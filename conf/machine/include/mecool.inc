@@ -54,7 +54,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     kernel-module-aml-fe \
     kernel-module-avl6862 \
     kernel-module-r848a \
-    firmware-avl6882 \
     "
 
 KERNEL_MODULE_AUTOLOAD += "\
