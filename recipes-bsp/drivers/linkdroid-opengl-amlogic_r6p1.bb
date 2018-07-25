@@ -10,7 +10,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 PROVIDES = "virtual/libgles1 virtual/libgles2 virtual/egl"
 RPROVIDES_${PN} = "virtual/libgles1 virtual/libgles2 virtual/egl"
 
-COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro_s905|k2pro_s905D|k3pro|k1plus)"
+COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro|k2prov2|k3pro|k1plus)"
 
 SRC_URI = "file://opengl-905-r6p1.tgz \
            file://10-meson_mali.rules \
