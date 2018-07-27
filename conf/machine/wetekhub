@@ -9,7 +9,7 @@ require conf/machine/include/wetek-amlogic.inc
 require conf/machine/include/arm/arch-armv8.inc
 require conf/machine/include/soc-family.inc
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS = "\
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     wetek-dvb-modules-wetekplay2 \
     wetek-dhd-wetekplay2 \
     wetek-mali-wetekplay2 \
@@ -20,7 +20,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS = "\
     opengl-amlogic \
     "
 
-MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS = "\
+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
     kernel-module-cdfs \
     kernel-module-sysfillrect \
     kernel-module-syscopyarea \
@@ -59,11 +59,11 @@ KERNEL_MODULE_AUTOLOAD += "\
 module_conf_dhd = "options dhd firmware_path=/lib/firmware/brcm/ nvram_path=/lib/firmware/brcm/"
 
 KERNEL_MODULE_PROBECONF += "\
-	dhd \
+    dhd \
 "
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-wetek2"
 PREFERRED_VERSION_linux-wetek2 = "3.14.29"
 
 KERNEL_IMAGETYPE = "Image"
-KERNEL_DEVICETREE = "meson-gxbb-wetek-hub.dtb"
+KERNEL_DEVICETREE = "meson-gxbb-wetek-hub.dtb Image-meson-gxbb-wetek-hub.dtb"
