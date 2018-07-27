@@ -7,7 +7,7 @@ DVBSKYPROVIDER = "kernel"
 
 IMAGEDIR ?= "${MACHINE}"
 
-MACHINE_EXTRA_RRECOMMENDS = " \
+MACHINE_EXTRA_RRECOMMENDS += "\
     libamplayer \
     libamavutils \
     libamadec \
@@ -25,7 +25,7 @@ SERIAL_CONSOLE = "115200 ttyS0"
 UBOOT_ENTRYPOINT  = "0x80008000"
 UBOOT_LOADADDRESS = "0x80008000"
 
-IMAGE_CMD_sdcard_append = " \
+IMAGE_CMD_sdcard_append = "\
     mkdir -p ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}; \
     mv ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.wetek-sd.img ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${IMAGE_NAME}.sdcard.img; \
     echo ${IMAGE_VER_STRING} > ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/imageversion; \
