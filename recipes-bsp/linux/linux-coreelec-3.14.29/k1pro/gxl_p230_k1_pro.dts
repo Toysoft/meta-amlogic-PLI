@@ -32,6 +32,12 @@
 		fe0_ts = <0>;
 		fe0_dev = <0>;
 	};
+	meson-remote {
+		status = "ok";
+	};
+	meson-ir {
+		status = "disabled";
+	};
 };
 
 &pinmux {
@@ -56,12 +62,6 @@
 	dtv_params_pin:dtv_params_pin {
 		amlogic,clrmask = <0x1 0x38000000 0x3 0x80>;
 		amlogic,pins = "GPIODV_13", "GPIODV_14", "GPIODV_15";
-	};
-	meson-remote {
-		status = "ok";
-	};
-	meson-ir {
-		status = "disabled";
 	};
 
 };
