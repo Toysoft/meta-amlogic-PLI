@@ -10,6 +10,8 @@ SRC_URI[sha256sum] = "6bc4cf8e0884a7955c6e0b6a4293525664631546f19b9222e4bf472120
 
 inherit kernel machine_kernel_pr
 
+MACHINE_KERNEL_PR_append = ".1"
+
 DEPENDS = "xz-native bc-native u-boot-mkimage-native virtual/${TARGET_PREFIX}gcc"
 
 # Avoid issues with Amlogic kernel binary components
@@ -19,7 +21,7 @@ INHIBIT_PACKAGE_DEBUG_STRIP = "1"
 LINUX_VERSION ?= "3.14.29"
 LINUX_VERSION_EXTENSION ?= "amlogic"
 
-COMPATIBLE_MACHINE = "wetekplay2"
+COMPATIBLE_MACHINE = "wetekplay2|wetekhub"
 
 SRC_URI = "https://github.com/wetek-enigma/linux-amlogic/archive/amlogic-3.14.y.tar.gz \
    file://defconfig \
@@ -46,7 +48,7 @@ do_compile_prepend () {
 
 do_compile_append() {
     install -d ${DEPLOY_DIR_IMAGE}
-    install -m 0644 ${B}/arch/arm64/boot/dts/amlogic/${KERNEL_DEVICETREE} ${DEPLOY_DIR_IMAGE}/meson64_wetekplay2.dtb
+    install -m 0644 ${B}/arch/arm64/boot/dts/amlogic/${KERNEL_DEVICETREE} ${DEPLOY_DIR_IMAGE}/meson64_${MACHINE}.dtb
     install -m 0644 ${WORKDIR}/boot.ini ${DEPLOY_DIR_IMAGE}/boot.ini
     install -m 0644 ${WORKDIR}/uInitrd ${DEPLOY_DIR_IMAGE}/uInitrd
 }

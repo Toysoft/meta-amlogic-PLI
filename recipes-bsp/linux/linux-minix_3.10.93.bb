@@ -10,6 +10,8 @@ SRC_URI[sha256sum] = "2a6843b68142835e81f6e73f4b9e0c3bb1c11e59029a866ab5691c95c6
 
 inherit kernel machine_kernel_pr
 
+MACHINE_KERNEL_PR_append = ".1"
+
 DEPENDS = "xz-native bc-native u-boot-mkimage-native virtual/${TARGET_PREFIX}gcc"
 
 # Avoid issues with Amlogic kernel binary components
@@ -19,7 +21,7 @@ INHIBIT_PACKAGE_DEBUG_STRIP = "1"
 LINUX_VERSION ?= "3.10.93"
 LINUX_VERSION_EXTENSION ?= "amlogic"
 
-COMPATIBLE_MACHINE = "(x8hp)"
+COMPATIBLE_MACHINE = "x8hp"
 
 SRC_URI = "http://source.mynonpublic.com/wetek/linux-wetek-3.10.y-master.tar.gz \
     file://defconfig \

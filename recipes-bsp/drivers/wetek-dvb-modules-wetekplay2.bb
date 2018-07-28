@@ -6,14 +6,14 @@ require conf/license/license-close.inc
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "wetekplay2"
+COMPATIBLE_MACHINE = "wetekplay2|wetekhub"
 
 KV = "3.14.29"
 SRCDATE = "20161126"
 
 PV = "${KV}+${SRCDATE}"
 
-RDEPENDS_${PN} += "wetek-e2-procfs-${MACHINE} firmware-avl6211 firmware-mn88436 firmware-ap6210 firmware-dvb-usb-af9015"
+RDEPENDS_${PN} += "wetek-e2-procfs-wetekplay2 firmware-avl6211 firmware-mn88436 firmware-ap6210 firmware-dvb-usb-af9015"
 
 SRC_URI = "file://wetek-dvb-modules-${KV}-${SRCDATE}.zip"
 

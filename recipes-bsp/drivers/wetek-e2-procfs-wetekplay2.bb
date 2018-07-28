@@ -6,7 +6,7 @@ require conf/license/license-close.inc
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "wetekplay2"
+COMPATIBLE_MACHINE = "wetekplay2|wetekhub"
 
 KV = "3.14.29"
 SRCDATE = "20161023"

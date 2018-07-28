@@ -23,7 +23,7 @@ SRC_URI = " \
     file://aaa.sh \
 "
 
-COMPATIBLE_MACHINE = "(wetekplay|wetekplay2|x8hp)"
+COMPATIBLE_MACHINE = "(wetekplay|wetekplay2|wetekhub|x8hp)"
 
 do_install() {
     install -d ${D}${sysconfdir}/init.d

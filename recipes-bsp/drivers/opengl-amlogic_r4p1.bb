@@ -8,7 +8,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 PROVIDES = "virtual/libgles1 virtual/libgles2 virtual/egl"
 
-COMPATIBLE_MACHINE = "(wetekplay|wetekplay2|odroidc2|x8hp)"
+COMPATIBLE_MACHINE = "(wetekplay|wetekplay2|wetekhub|odroidc2|x8hp)"
 
 SRC_URI[gxbb.md5sum] = "90ef0a79c37ba65f2c1b992a9bba2874"
 SRC_URI[mx.md5sum] = "c833d32411389cba490bdaaa43263ba"

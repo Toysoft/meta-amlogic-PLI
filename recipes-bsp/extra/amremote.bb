@@ -27,7 +27,7 @@ do_install() {
     install -d ${D}${bindir}
     install -d ${D}${sysconfdir}/amremote
     install -m 0755 ${S}/remotecfg ${D}${bindir}/
-    if [ "${MACHINE}" = "wetekplay2" ]; then
+    if [ "${MACHINE}" = "wetekplay2" -o "${MACHINE}" = "wetekhub" ]; then
 	install -m 0644 ${S}/wetek_play2.conf ${D}${sysconfdir}/amremote/wetek.conf
     elif [ "${MACHINE}" = "alien5" ]; then
 	install -m 0644 ${S}/alien5.conf ${D}${sysconfdir}/amremote/remote.conf
