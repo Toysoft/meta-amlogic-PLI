@@ -10,7 +10,7 @@ touch /etc/fstab
 mkdir -p /proc /sys /var/lock
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
-
+echo heartbeat > /sys/class/leds/led-sys/trigger
 # use /dev with devtmpfs
 if grep -q devtmpfs /proc/filesystems; then
     mkdir -p /dev
@@ -20,7 +20,7 @@ else
         fatal "ERROR: /dev doesn't exist and kernel doesn't has devtmpfs enabled."
     fi
 fi
-
+/etc/init.d/hdmi.sh
 # create mountpoint for root
 mkdir $ROOTFS_DIR
 
@@ -102,30 +102,23 @@ echo 8 > /proc/irq/62/smp_affinity   # dwc_otg, dwc_otg_hcd:usb2, dwc_otg_pcd
 #echo 4 > /sys/module/amvdec_h264/parameters/dec_control
 
 
-
-#Function for parsing command line options with "=" in them
-# get_opt("init=/sbin/init") will return "/sbin/init"
-get_opt() {
-    echo "$@" | cut -d "=" -f 2
-}
-
 #Defaults
 init="/sbin/init.sysvinit"
-root="/dev/mmcblk1p2"
+root="LABEL=ROOTFS"
 firmware=""
 rootfstype=
 
 #Process command line options
 for i in $(cat /proc/cmdline); do
     case $i in
-        root\=*)
-            root=$(get_opt $i)
+        root=*)
+            root=${i#root=}
             ;;
-        firmware\=*)
-            firmware=$(get_opt $i)
+        firmware=*)
+            firmware=${i#firmware=}
             ;;
-        rootfstype\=*)
-            rootfstype=$(get_opt $i)
+        rootfstype=*)
+            rootfstype=${i#rootfstype=}
             ;;
     esac
 done
@@ -203,6 +196,7 @@ echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo "Check if ${ROOTFS_DIR}/${init} exists and is executable"
 #Check if $init exists and is executable
 if [[ -x "/mnt/${init}" ]] ; then
+    echo default-on > /sys/class/leds/led-sys/trigger
     echo "Unmount all other mounts so that the ram used by the initramfs can be cleared after switch_root"
     #Unmount all other mounts so that the ram used by
     #the initramfs can be cleared after switch_root
