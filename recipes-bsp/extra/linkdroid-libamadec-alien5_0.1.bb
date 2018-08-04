@@ -6,15 +6,15 @@ COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro|k2prov2|k3pro|k1plus)"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRCDATE = "20180513"
+SRCDATE = "20180730"
 
 DEPENDS = "linkdroid-libamavutils-alien5 alsa-lib rtmpdump "
 RDEPENDS_${PN} = "ffmpeg linkdroid-libamavutils-alien5"
 
 inherit lib_package pkgconfig
 
-SRC_URI[md5sum] = "3adbd6b0a2c3c01a905c0475c3e6d66d"
-SRC_URI[sha256sum] = "c7f71e07b4ff0951d41ea786d7f9471c9f5d8c0e93c8ec895a9cc2a7c8b1287b"
+SRC_URI[md5sum] = "48c5a9acf0d8a66d03dbbfbf40d1f9e2"
+SRC_URI[sha256sum] = "62b130c98502d2f3d5f62f8939c707918caa69c4c2f8864ccd390d6e82c4fdd2"
 
 SRC_URI = "http://source.mynonpublic.com/linkdroid/${BPN}-${SRCDATE}.zip"
 
