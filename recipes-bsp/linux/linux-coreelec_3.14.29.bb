@@ -16,10 +16,10 @@ KERNEL_LD_append_aarch64 = " ${TOOLCHAIN_OPTIONS}"
 S = "${WORKDIR}/linux-amlogic-amlogic-3.14-nougat"
 B = "${WORKDIR}/build"
 
-MACHINE_KERNEL_PR_append = ".3"
+MACHINE_KERNEL_PR_append = ".4"
 
 DTS = "${@ d.getVar('KERNEL_DEVICETREE').replace('.dtb','.dts') }"
-SRC_URI = "https://github.com/PLi-metas/linux-amlogic/archive/amlogic-3.14-nougat.tar.gz;sha256sum=fd048760ff1ebe8078fcfa695d3e7c0c6aae55ba836a02316d8e616f61150249"
+SRC_URI = "https://github.com/PLi-metas/linux-amlogic/archive/amlogic-3.14-nougat.tar.gz;sha256sum=a34929ab18339aa69ec11b3deaf53395f92a96ffb731eda38844698135209485"
 SRC_URI += " \
   file://defconfig \
   file://persianprince.patch \
