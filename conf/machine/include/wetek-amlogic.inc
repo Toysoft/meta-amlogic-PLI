@@ -40,7 +40,7 @@ IMAGE_CMD_sdcard_append = "\
     rm -Rf ${IMAGEDIR}; \
     "
 
-MACHINE_FEATURES += "wlan bluetooth fb usbhost vfat alsa dvb-c nolcd"
+MACHINE_FEATURES += "wlan bluetooth fb usbhost vfat alsa dvb-c nolcd wetek-pli"
 
 PREFERRED_PROVIDER_virtual/libgles1 = "opengl-amlogic"
 PREFERRED_PROVIDER_virtual/libgles2 = "opengl-amlogic"

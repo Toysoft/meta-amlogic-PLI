@@ -30,7 +30,7 @@ UBOOT_LOADADDRESS = "0x01080000"
 
 INITRAMFS_IMAGE = "linkdroid-initramfs"
 
-MACHINE_FEATURES = "bluetooth usbhost vfat alsa dvb-c nolcd hdmicec fb skins1080 emmc aml-plugins"
+MACHINE_FEATURES = "bluetooth usbhost vfat alsa dvb-c nolcd hdmicec fb skins1080 emmc aml-plugins amlogic-pli"
 
 DVBPROVIDER = "kernel"
 DVBSKYPROVIDER = "kernel"
@@ -54,6 +54,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     kernel-module-aml-fe \
     kernel-module-avl6862 \
     kernel-module-r848a \
+    mecool-amlsetfb \
     "
 
 KERNEL_MODULE_AUTOLOAD += "\
@@ -90,8 +91,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
     kernel-module-8189es \
     kernel-module-cfg80211 \
     "
-
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "${@bb.utils.contains('MACHINE_FEATURES', 'fb', 'mecool-amlsetfb', '', d)}"
 
 PREFERRED_PROVIDER_virtual/libgles1 = "linkdroid-opengl-amlogic"
 PREFERRED_PROVIDER_virtual/libgles2 = "linkdroid-opengl-amlogic"
