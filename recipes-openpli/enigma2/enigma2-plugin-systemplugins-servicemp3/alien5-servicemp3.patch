@@ -1,0 +1,40 @@
+diff -Naur servicemp3-PLi/configure.ac servicemp3-PersianPrince/configure.ac
+--- servicemp3-PLi/configure.ac	2018-07-30 20:16:01.000000000 +0430
++++ servicemp3-PersianPrince/configure.ac	2018-08-06 11:39:38.236557984 +0430
+@@ -14,6 +14,10 @@
+ 	AS_HELP_STRING([--with-gstversion],[use gstreamer version (major.minor)]),
+ 	[GST_MAJORMINOR=$withval],[GST_MAJORMINOR=1.0])
+ 
++if test "$BOXTYPE" == "alien5" -o "$BOXTYPE" == "k1pro" -o "$BOXTYPE" == "k2pro" -o "$BOXTYPE" == "k2prov2" -o "$BOXTYPE" == "k3pro" -o "$BOXTYPE" == "k1plus"; then
++	AC_DEFINE(HAVE_ALIEN5, 1,[Enable Alien 5 family related changes])
++fi
++
+ PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR)
+ 
+ AC_DEFINE([DEBUG])
+diff -Naur servicemp3-PLi/servicemp3/servicemp3.cpp servicemp3-PersianPrince/servicemp3/servicemp3.cpp
+--- servicemp3-PLi/servicemp3/servicemp3.cpp	2018-07-30 20:16:01.000000000 +0430
++++ servicemp3-PersianPrince/servicemp3/servicemp3.cpp	2018-08-06 11:38:59.153225065 +0430
+@@ -21,6 +21,12 @@
+ #include <gst/pbutils/missing-plugins.h>
+ #include <sys/stat.h>
+ 
++#if HAVE_ALIEN5
++extern "C" {
++#include <codec.h>
++}
++#endif
++
+ #define HTTP_TIMEOUT 30
+ 
+ /*
+@@ -617,6 +623,9 @@
+ #endif
+ 	if ( m_gst_playbin )
+ 	{
++#if HAVE_ALIEN5
++		aml_set_mediaplay_source((void *)m_gst_playbin,(int)m_sourceinfo.is_audio);
++#endif
+ 		/*
+ 		 * avoid video conversion, let the dvbmediasink handle that using native video flag
+ 		 * volume control is done by hardware, do not use soft volume flag
