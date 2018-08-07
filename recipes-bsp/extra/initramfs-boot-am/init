@@ -21,6 +21,7 @@ else
     fi
 fi
 /etc/init.d/hdmi.sh
+. /functions
 # create mountpoint for root
 mkdir $ROOTFS_DIR
 
@@ -125,7 +126,7 @@ done
 
 rootfstype="ext4"
 init="/sbin/init.sysvinit"
-
+check_disks
 #Mount the root device
 if [ "${rootfstype}" != "" ]; then
     mount -t ${rootfstype} "${root}" /mnt
