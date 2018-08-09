@@ -9,7 +9,7 @@ include conf/license/license-gplv2.inc
 inherit pkgconfig update-rc.d
 
 INITSCRIPT_NAME = "amlsetfb"
-INITSCRIPT_PARAMS = "start 03 S ."
+INITSCRIPT_PARAMS = "start 00 S ."
 
 INHIBIT_DEFAULT_DEPS = "1"
 RDEPENDS_${PN} = "initscripts fbset fbset-modes"

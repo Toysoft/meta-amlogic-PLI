@@ -147,8 +147,6 @@ echo 1 > /sys/class/graphics/fb1/blank
 echo 0 > /sys/devices/virtual/graphics/fbcon/cursor_blink
 
 
-/usr/bin/remotecfg /etc/amremote/remote.conf
-
 echo default-on > /sys/class/leds/led-sys/trigger
 
 exit 0
