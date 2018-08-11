@@ -10,9 +10,9 @@ MACHINEKERNEL = "linkdroid"
 require conf/machine/include/arm/arch-armv8.inc
 require conf/machine/include/soc-family.inc
 
-IMAGE_CLASSES += "sdcard_image-alien5"
+IMAGE_CLASSES += "sdcard_image-amlogic"
 SDCARD_ROOTFS ?= "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4"
-IMAGE_FSTYPES ?= "ext4 alien5sdimg"
+IMAGE_FSTYPES ?= "ext4 amlogicsdimg"
 IMAGE_ROOTFS_SIZE = "476562"
 IMAGE_EXTRA_SPACE = "0"
 IMAGE_OVERHEAD_FACTOR = "1.0"
@@ -110,7 +110,7 @@ DISTRO_FEATURES_remove = "x11 wayland"
 
 IMAGEDIR ?= "${MACHINE}"
 
-IMAGE_CMD_alien5sdimg_append = " \
+IMAGE_CMD_amlogicsdimg_append = " \
     mkdir -p ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}; \
     mv ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-sd.img ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${IMAGE_NAME}-sd.img; \
     echo ${DISTRO_NAME}-${DISTRO_VERSION}.${BUILD_VERSION} > ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/imageversion; \

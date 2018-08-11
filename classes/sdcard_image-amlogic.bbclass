@@ -1,6 +1,6 @@
 inherit image_types
 
-IMAGE_TYPEDEP_alien5sdimg = "${SDIMG_ROOTFS_TYPE}"
+IMAGE_TYPEDEP_amlogicsdimg = "${SDIMG_ROOTFS_TYPE}"
 
 BOOTDD_VOLUME_ID ?= "BOOT"
 
@@ -11,7 +11,7 @@ IMAGE_ROOTFS_ALIGNMENT = "4096"
 SDIMG_ROOTFS_TYPE ?= "ext4"
 SDIMG_ROOTFS = "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.${SDIMG_ROOTFS_TYPE}"
 
-do_image_alien5sdimg[depends] += " \
+do_image_amlogicsdimg[depends] += " \
 			parted-native:do_populate_sysroot \
 			mtools-native:do_populate_sysroot \
 			dosfstools-native:do_populate_sysroot \
@@ -25,7 +25,7 @@ FATPAYLOAD ?= ""
 
 IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 
-IMAGE_CMD_alien5sdimg () {
+IMAGE_CMD_amlogicsdimg () {
 
 	BOOT_SPACE_ALIGNED=$(expr ${BOOT_SPACE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1)
 	BOOT_SPACE_ALIGNED=$(expr ${BOOT_SPACE_ALIGNED} - ${BOOT_SPACE_ALIGNED} % ${IMAGE_ROOTFS_ALIGNMENT})
