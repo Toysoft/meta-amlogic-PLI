@@ -254,3 +254,24 @@ diff -Naur enigma2-PLi/lib/service/servicedvb.cpp enigma2-PersianPrince/lib/serv
  	m_first_program_info = 1;
  	ePtr<iTsSource> source = createTsSource(service, packetsize);
  	m_service_handler.tuneExt(service, source, service.path.c_str(), m_cue, false, m_dvb_service, type, scrambled);
+diff --git a/lib/dvb/demux.cpp b/lib/dvb/demux.cpp
+index 44dc2ee45..6b7e12fb4 100644
+--- a/lib/dvb/demux.cpp
++++ b/lib/dvb/demux.cpp
+@@ -111,8 +111,15 @@ RESULT eDVBDemux::setSourceFrontend(int fenum)
+ 	if (fd < 0) return -1;
+ 	int n = DMX_SOURCE_FRONT0 + fenum;
+ 	int res = ::ioctl(fd, DMX_SET_SOURCE, &n);
+-	if (res)
++	if (res){
+ 		eDebug("[eDVBDemux] DMX_SET_SOURCE Frontend%d failed: %m", fenum);
++		/** FIXME: gg begin dirty hack  */
++		eDebug("[eDVBDemux] Ignoring due to limitation to one frontend for each adapter and missing ioctl....");
++		source = fenum;
++		res = 0;
++		/** FIXME: gg end dirty hack  */
++	}
++
+ 	else
+ 		source = fenum;
+ 	::close(fd);
