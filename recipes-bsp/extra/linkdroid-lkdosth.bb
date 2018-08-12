@@ -4,13 +4,11 @@ SECTION = "base"
 LICENSE = "proprietary"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "(alien5|k1pro|k2pro|k2prov2|k3pro|k1plus)"
+COMPATIBLE_MACHINE = "alien5"
 
 require conf/license/license-gplv2.inc
 
 inherit update-rc.d
-
-PV = "0"
 
 #INHIBIT_PACKAGE_STRIP = "1"
 

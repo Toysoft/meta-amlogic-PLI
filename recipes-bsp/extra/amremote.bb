@@ -15,7 +15,7 @@ PKGV = "git${GITPKGV}"
 
 SRCREV = "${AUTOREV}"
 
-SRC_URI = "${@bb.utils.contains("IMAGE_FSTYPES", "alien5sdimg", "git://github.com/PLi-metas/amremote.git;protocol=git;branch=arm64", "git://github.com/PLi-metas/amremote.git;protocol=git;branch=master", d)}"
+SRC_URI = "${@bb.utils.contains("IMAGE_FSTYPES", "amlogicsdimg", "git://github.com/PLi-metas/amremote.git;protocol=git;branch=arm64", "git://github.com/PLi-metas/amremote.git;protocol=git;branch=master", d)}"
 
 S = "${WORKDIR}/git"
 

@@ -28,7 +28,7 @@ KERNEL_IMAGETYPE = "fitImage"
 UBOOT_ENTRYPOINT = "0x01080000"
 UBOOT_LOADADDRESS = "0x01080000"
 
-INITRAMFS_IMAGE = "linkdroid-initramfs"
+INITRAMFS_IMAGE = "amlogic-initramfs"
 
 MACHINE_FEATURES = "bluetooth usbhost vfat alsa dvb-c nolcd hdmicec fb skins1080 emmc aml-plugins amlogic-pli"
 
@@ -36,7 +36,7 @@ DVBPROVIDER = "kernel"
 DVBSKYPROVIDER = "kernel"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    linkdroid-autoscript \
+    amlogic-autoscript \
     linkdroid-mali-alien5 \
     linkdroid-gst-amlavsink1 \
     gst-app \

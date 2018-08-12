@@ -8,8 +8,6 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 SRCDATE = "20180516"
 
-PV = "0"
-
 inherit lib_package
 
 SRC_URI[md5sum] = "a1809717024cc0095e7f42ad658b71d2"
