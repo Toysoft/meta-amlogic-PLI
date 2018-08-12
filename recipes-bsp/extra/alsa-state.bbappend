@@ -1,4 +1,6 @@
-# COMPATIBLE_MACHINE = "k1pro|k2pro|k2prov2|k3pro|k1plus"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+COMPATIBLE_MACHINE = "k1pro|k2pro|k2prov2|k3pro|k1plus"
 
 # include conf/license/license-gplv2.inc
 
@@ -12,4 +14,3 @@
 # 	install -d ${D}${sysconfdir}
 #     install -m 0755 ${WORKDIR}/asound.conf  ${D}${sysconfdir}/asound.conf
 # }
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
