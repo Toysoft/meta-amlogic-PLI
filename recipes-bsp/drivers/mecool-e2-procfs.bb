@@ -10,6 +10,8 @@ COMPATIBLE_MACHINE = "k1pro|k2pro|k2prov2|k3pro|k1plus"
 
 SRCREV = "${AUTOREV}"
 
+PR = "r1"
+
 SRC_URI = "git://github.com/PLi-metas/amlogic-e2-procfs.git;protocol=git"
 
 S = "${WORKDIR}/git/source/e2_procfs"
