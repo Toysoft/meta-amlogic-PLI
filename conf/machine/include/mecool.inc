@@ -56,6 +56,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     kernel-module-r848a \
     mecool-amlsetfb \
     mecool-setup \
+    kernel-module-8189es \
     "
 
 KERNEL_MODULE_AUTOLOAD += "\
@@ -89,7 +90,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
     kernel-module-6lowpan-iphc \
     kernel-module-libcrc32c \
     kernel-module-xfs \
-    kernel-module-8189es \
     kernel-module-cfg80211 \
     "
 
