@@ -30,7 +30,7 @@ UBOOT_LOADADDRESS = "0x01080000"
 
 INITRAMFS_IMAGE = "amlogic-initramfs"
 
-MACHINE_FEATURES = "bluetooth usbhost vfat alsa dvb-c nolcd hdmicec fb skins1080 emmc aml-plugins mecool-pli"
+MACHINE_FEATURES = "wlan bluetooth usbhost vfat alsa dvb-c nolcd hdmicec fb skins1080 emmc aml-plugins mecool-pli"
 
 DVBPROVIDER = "kernel"
 DVBSKYPROVIDER = "kernel"
@@ -56,6 +56,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     kernel-module-r848a \
     mecool-amlsetfb \
     mecool-setup \
+    kernel-module-8189es \
     "
 
 KERNEL_MODULE_AUTOLOAD += "\
