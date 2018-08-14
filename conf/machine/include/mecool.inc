@@ -57,6 +57,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     mecool-amlsetfb \
     mecool-setup \
     firmware-ap6xxx-mecool \
+    kernel-module-dhd \
     "
 
 KERNEL_MODULE_AUTOLOAD += "\
@@ -92,7 +93,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
     kernel-module-libcrc32c \
     kernel-module-xfs \
     kernel-module-cfg80211 \
-    kernel-module-dhd \
     "
 
 PREFERRED_PROVIDER_virtual/libgles1 = "linkdroid-opengl-amlogic"
