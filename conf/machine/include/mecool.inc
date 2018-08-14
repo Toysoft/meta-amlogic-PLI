@@ -75,6 +75,7 @@ KERNEL_MODULE_AUTOLOAD += "\
     aml_fe \
     avl6862 \
     r848a \
+    dhd \
 "
 
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
@@ -91,6 +92,7 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
     kernel-module-libcrc32c \
     kernel-module-xfs \
     kernel-module-cfg80211 \
+    kernel-module-dhd \
     "
 
 PREFERRED_PROVIDER_virtual/libgles1 = "linkdroid-opengl-amlogic"
