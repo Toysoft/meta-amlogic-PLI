@@ -56,6 +56,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     kernel-module-r848a \
     mecool-amlsetfb \
     mecool-setup \
+    firmware-ap6xxx-mecool \
     "
 
 KERNEL_MODULE_AUTOLOAD += "\
