@@ -71,7 +71,6 @@ KERNEL_MODULE_AUTOLOAD += "\
     mceusb \
     rc-core \
     cfg80211 \
-    8189es \
     aml \
     aml_fe \
     avl6862 \
