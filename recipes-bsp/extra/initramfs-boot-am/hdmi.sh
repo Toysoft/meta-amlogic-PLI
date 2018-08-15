@@ -1,8 +1,6 @@
 #!/bin/sh
-bpp=24
-mode=1080p50hz
-#mode=720p60hz
-#mode=2560x1600p60hz
+bpp=32
+mode=720p60hz
 for x in $(cat /proc/cmdline); do
         case ${x} in
                 m_bpp=*) export bpp=${x#*=} ;;
