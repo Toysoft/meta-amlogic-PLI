@@ -9,6 +9,9 @@ for x in $(cat /proc/cmdline); do
         esac
 done
 
+bpp=32
+mode=720p60hz
+
 HPD_STATE=/sys/class/amhdmitx/amhdmitx0/hpd_state
 DISP_CAP=/sys/class/amhdmitx/amhdmitx0/disp_cap
 DISP_MODE=/sys/class/display/mode
