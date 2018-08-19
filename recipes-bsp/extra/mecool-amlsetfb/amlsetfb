@@ -1,7 +1,6 @@
 #!/bin/sh
 echo heartbeat > /sys/class/leds/led-sys/trigger
-bpp=32
-mode=720p60hz
+
 for x in $(cat /proc/cmdline); do
         case ${x} in
                 m_bpp=*) export bpp=${x#*=} ;;
