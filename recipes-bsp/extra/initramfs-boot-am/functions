@@ -9,7 +9,7 @@ force_fsck() {
   if [ "$?" -ne "0" -o "$?" -gt "128" ] ; then
     echo "Repairing filesystem..."
     echo ""
-    /sbin/e2fsck  -y $root
+    /sbin/e2fsck -T -M -y $root
     FSCK_RET="$?"
     if [ "$(( $FSCK_RET & 8 ))" = 8 ] ; then
       # fubar
@@ -32,7 +32,7 @@ force_fsck() {
 
 check_disks() {
     echo "Checking disk(s): $root"
-    /sbin/e2fsck -p -a $root > /dev/null 2>&1
+    /sbin/e2fsck -T -M -p -a $root > /dev/null 2>&1
     FSCK_RET="$?"
 
     # FSCK_RET is the bit-wise OR of the exit codes for each filesystem that is checked.
