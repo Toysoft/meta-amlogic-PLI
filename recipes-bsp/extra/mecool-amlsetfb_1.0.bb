@@ -5,7 +5,7 @@ include conf/license/license-gplv2.inc
 
 COMPATIBLE_MACHINE = "k1pro|k2pro|k2prov2|k3pro|k1plus"
 
-PR = "r5"
+PR = "r6"
 
 inherit pkgconfig update-rc.d
 
