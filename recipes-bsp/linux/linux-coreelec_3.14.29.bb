@@ -16,7 +16,7 @@ KERNEL_LD_append_aarch64 = " ${TOOLCHAIN_OPTIONS}"
 S = "${WORKDIR}/linux-amlogic-amlogic-3.14-nougat"
 B = "${WORKDIR}/build"
 
-MACHINE_KERNEL_PR_append = ".8"
+MACHINE_KERNEL_PR_append = ".9"
 
 DTS = "${@ d.getVar('KERNEL_DEVICETREE').replace('.dtb','.dts') }"
 SRC_URI = "https://github.com/PLi-metas/linux-amlogic/archive/amlogic-3.14-nougat.tar.gz"
@@ -29,6 +29,10 @@ SRC_URI += "\
   file://persianprince.patch \
   file://${DTS} \
   "
+
+do_configure_prepend(){
+    sed -i "s/@DISTRONAME@/${MACHINE}/" "${WORKDIR}/defconfig"
+}
 
 do_compile_append() {
 	install -m 0644 ${WORKDIR}/${DTS} ${S}/arch/arm64/boot/dts/amlogic/
