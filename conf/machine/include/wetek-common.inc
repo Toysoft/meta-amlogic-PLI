@@ -13,7 +13,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     gst-app \
     gst-amlavout \
     gst-fluendo-mpegdemux \
-    opengl-amlogic \
     "
 
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
